@@ -23,5 +23,5 @@ mkdir -p build
 cd build
 ../configure
 make
-./src/cogaps --help
+./cogaps --help
 cd ..
