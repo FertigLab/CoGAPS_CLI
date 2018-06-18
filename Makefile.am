@@ -1,8 +1,7 @@
 bin_PROGRAMS = cogaps
 
 cogaps_SOURCES = \
-    src/CoGAPS.cpp \
-    src/Rpackage/src/GapsDispatcher.cpp
+    src/CoGAPS.cpp
 
 cogaps_CPPFLAGS = @BOOST_CPPFLAGS@
 cogaps_LDFLAGS = @BOOST_LDFLAGS@
