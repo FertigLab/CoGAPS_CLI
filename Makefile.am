@@ -17,7 +17,7 @@ cogaps_SOURCES = \
     src/Rpackage/src/math/Algorithms.cpp \
     src/Rpackage/src/math/Random.cpp
 
-cogaps_CPPFLAGS = @BOOST_CPPFLAGS@
-cogaps_CXXFLAGS = -msse4.2
-cogaps_LDFLAGS = @BOOST_LDFLAGS@
-cogaps_LDADD = @BOOST_PROGRAM_OPTIONS_LIB@
+cogaps_CPPFLAGS = @GAPS_CPP_FLAGS@
+cogaps_CXXFLAGS = @GAPS_CXX_FLAGS@
+cogaps_LDFLAGS = @GAPS_LDFLAGS@
+cogaps_LDADD = @GAPS_LIBS@

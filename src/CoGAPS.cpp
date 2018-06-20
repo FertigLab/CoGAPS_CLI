@@ -13,7 +13,8 @@ int main(int argc, char* argv[])
     desc.add_options()
         ("help", "produce help message")
         ("data", po::value<std::string>(), "path to data matrix")
-        ("numPatterns", po::value<unsigned>()->default_value(3), "number of patterns to fit")
+        ("nPatterns", po::value<unsigned>()->default_value(7), "number of patterns to fit")
+        ("nIterations", po::value<unsigned>()->default_value(1000), "number of iterations to run cogaps for")
         ("seed", po::value<uint32_t>()->default_value(0), "seed for random number generator")
         ("outFile", po::value<std::string>()->default_value("cogaps_result"), "name of output file")
         ("nCores", po::value<unsigned>()->default_value(1), "number of cores to run on")
@@ -35,7 +36,8 @@ int main(int argc, char* argv[])
     }
 
     GapsDispatcher dispatcher(vm["seed"].as<uint32_t>());
-    dispatcher.setNumPatterns(vm["numPatterns"].as<unsigned>());
+    dispatcher.setNumPatterns(vm["nPatterns"].as<unsigned>());
+    dispatcher.setMaxIterations(vm["nIterations"].as<unsigned>());
     dispatcher.setNumCoresPerSet(vm["nCores"].as<unsigned>());
     dispatcher.loadData(vm["data"].as<std::string>());
     GapsResult result(dispatcher.run());
