@@ -50,11 +50,35 @@ if test "x$build_debug" = "xyes" ; then
 elif test "x$build_debug" = "xno" ; then
     echo "Building Release Version of CoGAPS"
 elif test "x$build_debug" = "xasan" ; then
-    echo "Building Debug Version of CoGAPS with Address Sanitizer"
+    echo "Building Debug Version of CoGAPS with AddressSanitizer"
     AX_CHECK_COMPILE_FLAG([-fsanitize=address],
         [GAPS_CXX_FLAGS+=" -fsanitize=address "])
     AX_CHECK_COMPILE_FLAG([-fsanitize=address],
         [GAPS_LD_FLAGS+=" -fsanitize=address "])
+    AX_CHECK_COMPILE_FLAG([-fno-omit-frame-pointer],
+        [GAPS_CXX_FLAGS+=" -fno-omit-frame-pointer "])
+elif test "x$build_debug" = "xlsan" ; then
+    echo "Building Debug Version of CoGAPS with LeakSanitizer"
+    AX_CHECK_COMPILE_FLAG([-fsanitize=leak],
+        [GAPS_CXX_FLAGS+=" -fsanitize=leak "])
+    AX_CHECK_COMPILE_FLAG([-fsanitize=leak],
+        [GAPS_LD_FLAGS+=" -fsanitize=leak "])
+    AX_CHECK_COMPILE_FLAG([-fno-omit-frame-pointer],
+        [GAPS_CXX_FLAGS+=" -fno-omit-frame-pointer "])
+elif test "x$build_debug" = "xusan" ; then
+    echo "Building Debug Version of CoGAPS with UndefinedBehaviorSanitizer"
+    AX_CHECK_COMPILE_FLAG([-fsanitize=undefined],
+        [GAPS_CXX_FLAGS+=" -fsanitize=undefined "])
+    AX_CHECK_COMPILE_FLAG([-fsanitize=undefined],
+        [GAPS_LD_FLAGS+=" -fsanitize=undefined "])
+    AX_CHECK_COMPILE_FLAG([-fno-omit-frame-pointer],
+        [GAPS_CXX_FLAGS+=" -fno-omit-frame-pointer "])
+elif test "x$build_debug" = "xtsan" ; then
+    echo "Building Debug Version of CoGAPS with ThreadSanitizer"
+    AX_CHECK_COMPILE_FLAG([-fsanitize=thread],
+        [GAPS_CXX_FLAGS+=" -fsanitize=thread "])
+    AX_CHECK_COMPILE_FLAG([-fsanitize=thread],
+        [GAPS_LD_FLAGS+=" -fsanitize=thread "])
     AX_CHECK_COMPILE_FLAG([-fno-omit-frame-pointer],
         [GAPS_CXX_FLAGS+=" -fno-omit-frame-pointer "])
 else

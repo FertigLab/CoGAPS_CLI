@@ -6502,7 +6502,7 @@ if test "x$build_debug" = "xyes" ; then
 elif test "x$build_debug" = "xno" ; then
     echo "Building Release Version of CoGAPS"
 elif test "x$build_debug" = "xasan" ; then
-    echo "Building Debug Version of CoGAPS with Address Sanitizer"
+    echo "Building Debug Version of CoGAPS with AddressSanitizer"
     { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether C++ compiler accepts -fsanitize=address" >&5
 $as_echo_n "checking whether C++ compiler accepts -fsanitize=address... " >&6; }
 if ${ax_cv_check_cxxflags___fsanitize_address+:} false; then :
@@ -6569,6 +6569,327 @@ fi
 $as_echo "$ax_cv_check_cxxflags___fsanitize_address" >&6; }
 if test "x$ax_cv_check_cxxflags___fsanitize_address" = xyes; then :
   GAPS_LD_FLAGS+=" -fsanitize=address "
+else
+  :
+fi
+
+    { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether C++ compiler accepts -fno-omit-frame-pointer" >&5
+$as_echo_n "checking whether C++ compiler accepts -fno-omit-frame-pointer... " >&6; }
+if ${ax_cv_check_cxxflags___fno_omit_frame_pointer+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+
+  ax_check_save_flags=$CXXFLAGS
+  CXXFLAGS="$CXXFLAGS  -fno-omit-frame-pointer"
+  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+int
+main ()
+{
+
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_cxx_try_compile "$LINENO"; then :
+  ax_cv_check_cxxflags___fno_omit_frame_pointer=yes
+else
+  ax_cv_check_cxxflags___fno_omit_frame_pointer=no
+fi
+rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
+  CXXFLAGS=$ax_check_save_flags
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ax_cv_check_cxxflags___fno_omit_frame_pointer" >&5
+$as_echo "$ax_cv_check_cxxflags___fno_omit_frame_pointer" >&6; }
+if test "x$ax_cv_check_cxxflags___fno_omit_frame_pointer" = xyes; then :
+  GAPS_CXX_FLAGS+=" -fno-omit-frame-pointer "
+else
+  :
+fi
+
+elif test "x$build_debug" = "xlsan" ; then
+    echo "Building Debug Version of CoGAPS with LeakSanitizer"
+    { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether C++ compiler accepts -fsanitize=leak" >&5
+$as_echo_n "checking whether C++ compiler accepts -fsanitize=leak... " >&6; }
+if ${ax_cv_check_cxxflags___fsanitize_leak+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+
+  ax_check_save_flags=$CXXFLAGS
+  CXXFLAGS="$CXXFLAGS  -fsanitize=leak"
+  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+int
+main ()
+{
+
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_cxx_try_compile "$LINENO"; then :
+  ax_cv_check_cxxflags___fsanitize_leak=yes
+else
+  ax_cv_check_cxxflags___fsanitize_leak=no
+fi
+rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
+  CXXFLAGS=$ax_check_save_flags
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ax_cv_check_cxxflags___fsanitize_leak" >&5
+$as_echo "$ax_cv_check_cxxflags___fsanitize_leak" >&6; }
+if test "x$ax_cv_check_cxxflags___fsanitize_leak" = xyes; then :
+  GAPS_CXX_FLAGS+=" -fsanitize=leak "
+else
+  :
+fi
+
+    { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether C++ compiler accepts -fsanitize=leak" >&5
+$as_echo_n "checking whether C++ compiler accepts -fsanitize=leak... " >&6; }
+if ${ax_cv_check_cxxflags___fsanitize_leak+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+
+  ax_check_save_flags=$CXXFLAGS
+  CXXFLAGS="$CXXFLAGS  -fsanitize=leak"
+  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+int
+main ()
+{
+
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_cxx_try_compile "$LINENO"; then :
+  ax_cv_check_cxxflags___fsanitize_leak=yes
+else
+  ax_cv_check_cxxflags___fsanitize_leak=no
+fi
+rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
+  CXXFLAGS=$ax_check_save_flags
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ax_cv_check_cxxflags___fsanitize_leak" >&5
+$as_echo "$ax_cv_check_cxxflags___fsanitize_leak" >&6; }
+if test "x$ax_cv_check_cxxflags___fsanitize_leak" = xyes; then :
+  GAPS_LD_FLAGS+=" -fsanitize=leak "
+else
+  :
+fi
+
+    { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether C++ compiler accepts -fno-omit-frame-pointer" >&5
+$as_echo_n "checking whether C++ compiler accepts -fno-omit-frame-pointer... " >&6; }
+if ${ax_cv_check_cxxflags___fno_omit_frame_pointer+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+
+  ax_check_save_flags=$CXXFLAGS
+  CXXFLAGS="$CXXFLAGS  -fno-omit-frame-pointer"
+  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+int
+main ()
+{
+
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_cxx_try_compile "$LINENO"; then :
+  ax_cv_check_cxxflags___fno_omit_frame_pointer=yes
+else
+  ax_cv_check_cxxflags___fno_omit_frame_pointer=no
+fi
+rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
+  CXXFLAGS=$ax_check_save_flags
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ax_cv_check_cxxflags___fno_omit_frame_pointer" >&5
+$as_echo "$ax_cv_check_cxxflags___fno_omit_frame_pointer" >&6; }
+if test "x$ax_cv_check_cxxflags___fno_omit_frame_pointer" = xyes; then :
+  GAPS_CXX_FLAGS+=" -fno-omit-frame-pointer "
+else
+  :
+fi
+
+elif test "x$build_debug" = "xusan" ; then
+    echo "Building Debug Version of CoGAPS with UndefinedBehaviorSanitizer"
+    { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether C++ compiler accepts -fsanitize=undefined" >&5
+$as_echo_n "checking whether C++ compiler accepts -fsanitize=undefined... " >&6; }
+if ${ax_cv_check_cxxflags___fsanitize_undefined+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+
+  ax_check_save_flags=$CXXFLAGS
+  CXXFLAGS="$CXXFLAGS  -fsanitize=undefined"
+  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+int
+main ()
+{
+
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_cxx_try_compile "$LINENO"; then :
+  ax_cv_check_cxxflags___fsanitize_undefined=yes
+else
+  ax_cv_check_cxxflags___fsanitize_undefined=no
+fi
+rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
+  CXXFLAGS=$ax_check_save_flags
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ax_cv_check_cxxflags___fsanitize_undefined" >&5
+$as_echo "$ax_cv_check_cxxflags___fsanitize_undefined" >&6; }
+if test "x$ax_cv_check_cxxflags___fsanitize_undefined" = xyes; then :
+  GAPS_CXX_FLAGS+=" -fsanitize=undefined "
+else
+  :
+fi
+
+    { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether C++ compiler accepts -fsanitize=undefined" >&5
+$as_echo_n "checking whether C++ compiler accepts -fsanitize=undefined... " >&6; }
+if ${ax_cv_check_cxxflags___fsanitize_undefined+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+
+  ax_check_save_flags=$CXXFLAGS
+  CXXFLAGS="$CXXFLAGS  -fsanitize=undefined"
+  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+int
+main ()
+{
+
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_cxx_try_compile "$LINENO"; then :
+  ax_cv_check_cxxflags___fsanitize_undefined=yes
+else
+  ax_cv_check_cxxflags___fsanitize_undefined=no
+fi
+rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
+  CXXFLAGS=$ax_check_save_flags
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ax_cv_check_cxxflags___fsanitize_undefined" >&5
+$as_echo "$ax_cv_check_cxxflags___fsanitize_undefined" >&6; }
+if test "x$ax_cv_check_cxxflags___fsanitize_undefined" = xyes; then :
+  GAPS_LD_FLAGS+=" -fsanitize=undefined "
+else
+  :
+fi
+
+    { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether C++ compiler accepts -fno-omit-frame-pointer" >&5
+$as_echo_n "checking whether C++ compiler accepts -fno-omit-frame-pointer... " >&6; }
+if ${ax_cv_check_cxxflags___fno_omit_frame_pointer+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+
+  ax_check_save_flags=$CXXFLAGS
+  CXXFLAGS="$CXXFLAGS  -fno-omit-frame-pointer"
+  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+int
+main ()
+{
+
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_cxx_try_compile "$LINENO"; then :
+  ax_cv_check_cxxflags___fno_omit_frame_pointer=yes
+else
+  ax_cv_check_cxxflags___fno_omit_frame_pointer=no
+fi
+rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
+  CXXFLAGS=$ax_check_save_flags
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ax_cv_check_cxxflags___fno_omit_frame_pointer" >&5
+$as_echo "$ax_cv_check_cxxflags___fno_omit_frame_pointer" >&6; }
+if test "x$ax_cv_check_cxxflags___fno_omit_frame_pointer" = xyes; then :
+  GAPS_CXX_FLAGS+=" -fno-omit-frame-pointer "
+else
+  :
+fi
+
+elif test "x$build_debug" = "xtsan" ; then
+    echo "Building Debug Version of CoGAPS with ThreadSanitizer"
+    { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether C++ compiler accepts -fsanitize=thread" >&5
+$as_echo_n "checking whether C++ compiler accepts -fsanitize=thread... " >&6; }
+if ${ax_cv_check_cxxflags___fsanitize_thread+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+
+  ax_check_save_flags=$CXXFLAGS
+  CXXFLAGS="$CXXFLAGS  -fsanitize=thread"
+  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+int
+main ()
+{
+
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_cxx_try_compile "$LINENO"; then :
+  ax_cv_check_cxxflags___fsanitize_thread=yes
+else
+  ax_cv_check_cxxflags___fsanitize_thread=no
+fi
+rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
+  CXXFLAGS=$ax_check_save_flags
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ax_cv_check_cxxflags___fsanitize_thread" >&5
+$as_echo "$ax_cv_check_cxxflags___fsanitize_thread" >&6; }
+if test "x$ax_cv_check_cxxflags___fsanitize_thread" = xyes; then :
+  GAPS_CXX_FLAGS+=" -fsanitize=thread "
+else
+  :
+fi
+
+    { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether C++ compiler accepts -fsanitize=thread" >&5
+$as_echo_n "checking whether C++ compiler accepts -fsanitize=thread... " >&6; }
+if ${ax_cv_check_cxxflags___fsanitize_thread+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+
+  ax_check_save_flags=$CXXFLAGS
+  CXXFLAGS="$CXXFLAGS  -fsanitize=thread"
+  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+int
+main ()
+{
+
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_cxx_try_compile "$LINENO"; then :
+  ax_cv_check_cxxflags___fsanitize_thread=yes
+else
+  ax_cv_check_cxxflags___fsanitize_thread=no
+fi
+rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
+  CXXFLAGS=$ax_check_save_flags
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ax_cv_check_cxxflags___fsanitize_thread" >&5
+$as_echo "$ax_cv_check_cxxflags___fsanitize_thread" >&6; }
+if test "x$ax_cv_check_cxxflags___fsanitize_thread" = xyes; then :
+  GAPS_LD_FLAGS+=" -fsanitize=thread "
 else
   :
 fi
