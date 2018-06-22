@@ -17,7 +17,7 @@ AC_ARG_ENABLE(warnings, [AC_HELP_STRING([--enable-warnings],
 # Check if specific version of SIMD instructions requested
 AC_ARG_ENABLE(simd, [AC_HELP_STRING([--enable-simd],
     [specify simd instruction set (sse, avx)])],
-    [simd_version=$enableval], [simd_version=sse])
+    [simd_version=$enableval], [simd_version=avx])
 
 # default CoGAPS specific flags
 GAPS_CPP_FLAGS=" -DBOOST_MATH_PROMOTE_DOUBLE_POLICY=0 "
@@ -47,37 +47,17 @@ if test "x$build_debug" = "xyes" ; then
 elif test "x$build_debug" = "xno" ; then
     echo "Building Release Version of CoGAPS"
 elif test "x$build_debug" = "xasan" ; then
-    echo "Building Debug Version of CoGAPS with AddressSanitizer"
-    AX_CHECK_COMPILE_FLAG([-fsanitize=address],
-        [GAPS_CXX_FLAGS+=" -fsanitize=address "])
-    AX_CHECK_COMPILE_FLAG([-fsanitize=address],
-        [GAPS_LD_FLAGS+=" -fsanitize=address "])
-    AX_CHECK_COMPILE_FLAG([-fno-omit-frame-pointer],
-        [GAPS_CXX_FLAGS+=" -fno-omit-frame-pointer "])
+    GAPS_CXX_FLAGS+=" -fsanitize=address -fno-omit-frame-pointer "
+    GAPS_LD_FLAGS+=" -fsanitize=address "
+elif test "x$build_debug" = "xubsan" ; then
+    GAPS_CXX_FLAGS+=" -fsanitize=undefined -fno-omit-frame-pointer "
+    GAPS_LD_FLAGS+=" -fsanitize=undefined "
 elif test "x$build_debug" = "xlsan" ; then
-    echo "Building Debug Version of CoGAPS with LeakSanitizer"
-    AX_CHECK_COMPILE_FLAG([-fsanitize=leak],
-        [GAPS_CXX_FLAGS+=" -fsanitize=leak "])
-    AX_CHECK_COMPILE_FLAG([-fsanitize=leak],
-        [GAPS_LD_FLAGS+=" -fsanitize=leak "])
-    AX_CHECK_COMPILE_FLAG([-fno-omit-frame-pointer],
-        [GAPS_CXX_FLAGS+=" -fno-omit-frame-pointer "])
-elif test "x$build_debug" = "xusan" ; then
-    echo "Building Debug Version of CoGAPS with UndefinedBehaviorSanitizer"
-    AX_CHECK_COMPILE_FLAG([-fsanitize=undefined],
-        [GAPS_CXX_FLAGS+=" -fsanitize=undefined "])
-    AX_CHECK_COMPILE_FLAG([-fsanitize=undefined],
-        [GAPS_LD_FLAGS+=" -fsanitize=undefined "])
-    AX_CHECK_COMPILE_FLAG([-fno-omit-frame-pointer],
-        [GAPS_CXX_FLAGS+=" -fno-omit-frame-pointer "])
+    GAPS_CXX_FLAGS+=" -fsanitize=leak -fno-omit-frame-pointer "
+    GAPS_LD_FLAGS+=" -fsanitize=leak "
 elif test "x$build_debug" = "xtsan" ; then
-    echo "Building Debug Version of CoGAPS with ThreadSanitizer"
-    AX_CHECK_COMPILE_FLAG([-fsanitize=thread],
-        [GAPS_CXX_FLAGS+=" -fsanitize=thread "])
-    AX_CHECK_COMPILE_FLAG([-fsanitize=thread],
-        [GAPS_LD_FLAGS+=" -fsanitize=thread "])
-    AX_CHECK_COMPILE_FLAG([-fno-omit-frame-pointer],
-        [GAPS_CXX_FLAGS+=" -fno-omit-frame-pointer "])
+    GAPS_CXX_FLAGS+=" -fsanitize=thread -fno-omit-frame-pointer "
+    GAPS_LD_FLAGS+=" -fsanitize=thread "
 else
     echo "Error: Invalid Debug Options"
     exit -1
@@ -85,28 +65,52 @@ fi
 
 # set compile flags if warnings enabled
 if test "x$warnings" = "xyes" ; then
-    AX_CHECK_COMPILE_FLAG([-Wall], [GAPS_CXX_FLAGS+=" -Wall "])
-    AX_CHECK_COMPILE_FLAG([-Wextra], [GAPS_CXX_FLAGS+=" -Wextra "])
-    AX_CHECK_COMPILE_FLAG([-Werror], [GAPS_CXX_FLAGS+=" -Werror "])
-    AX_CHECK_COMPILE_FLAG([-Wno-unused-parameter],
-        [GAPS_CXX_FLAGS+=" -Wno-unused-parameter "])
+    if test "x$ax_cv_cxx_compiler_vendor" = "xgnu" || test "x$ax_cv_cxx_compiler_vendor" = "xclang"; then
+        GAPS_CXX_FLAGS+=" -Wall -Wextra -Werror -Wno-unused-parameter "
+    fi
 fi
 
 # set compile flags for SIMD
-if test "x$simd_version" = "xyes" ; then
-    echo "Building with SSE instructions"
-    AX_CHECK_COMPILE_FLAG([-msse4.2], [GAPS_CXX_FLAGS+=" -msse4.2 "])
-elif test "x$simd_version" = "xsse" ; then
-    echo "Building with SSE instructions"
-    AX_CHECK_COMPILE_FLAG([-msse4.2], [GAPS_CXX_FLAGS+=" -msse4.2 "])
-elif test "x$simd_version" = "xavx" ; then
-    echo "Building with AVX instructions"
-    AX_CHECK_COMPILE_FLAG([-mavx], [GAPS_CXX_FLAGS+=" -mavx "])    
-elif test "x$simd_version" = "xno" ; then
+AX_EXT
+echo "Supported SIMD flags: " $SIMD_FLAGS
+
+if test "x$simd_version" != "xavx" && test "x$simd_version" != "xsse" && test "x$simd_version" != "xno" && test "x$simd_version" != "xyes" ; then
+    echo "Invalid SIMD Type, Defaulting to AVX"
+    simd_version=avx
+fi
+
+avx_supported=false
+if test "x$simd_version" = "xavx" || test "x$simd_version" = "xyes" ; then
+    for s in $SIMD_FLAGS; do
+        if test "x$s" = "x-mavx"; then
+            avx_supported=true
+            echo "Building with AVX instructions"
+            GAPS_CXX_FLAGS+=" -mavx "
+        fi
+    done
+    if test "x$avx_supported" = "xfalse" ; then
+        echo "Note: AVX not supported, trying for SSE"
+        simd_version=sse
+    fi
+fi
+
+sse_supported=false
+if test "x$simd_version" = "xsse" ; then
+    for s in $SIMD_FLAGS; do
+        if test "x$s" = "x-msse4.2"; then
+            sse_supported=true
+            echo "Building with SSE instructions"
+            GAPS_CXX_FLAGS+=" -msse4.2 "
+        fi
+    done
+    if test "x$sse_supported" = "xfalse" ; then
+        echo "Note: SSE not supported"
+        simd_version=no
+    fi
+fi
+
+if test "x$simd_version" = "xno" ; then
     echo "Building without SIMD instructions"
-else
-    echo "Error: Invalid SIMD type"
-    exit -1
 fi
 
 # export variables containing flags
