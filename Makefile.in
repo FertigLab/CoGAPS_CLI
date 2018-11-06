@@ -106,20 +106,32 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am__dirstamp = $(am__leading_dot)dirstamp
 am_cogaps_OBJECTS = src/cogaps-CoGAPS.$(OBJEXT) \
-	src/Rpackage/src/cogaps-AtomicDomain.$(OBJEXT) \
-	src/Rpackage/src/cogaps-GapsDispatcher.$(OBJEXT) \
+	src/Rpackage/src/cogaps-GapsParameters.$(OBJEXT) \
+	src/Rpackage/src/cogaps-GapsResult.$(OBJEXT) \
 	src/Rpackage/src/cogaps-GapsRunner.$(OBJEXT) \
 	src/Rpackage/src/cogaps-GapsStatistics.$(OBJEXT) \
-	src/Rpackage/src/cogaps-GibbsSampler.$(OBJEXT) \
-	src/Rpackage/src/cogaps-ProposalQueue.$(OBJEXT) \
+	src/Rpackage/src/atomic/cogaps-AtomAllocator.$(OBJEXT) \
+	src/Rpackage/src/atomic/cogaps-AtomicDomain.$(OBJEXT) \
+	src/Rpackage/src/atomic/cogaps-ProposalQueue.$(OBJEXT) \
+	src/Rpackage/src/data_structures/cogaps-HashSets.$(OBJEXT) \
+	src/Rpackage/src/data_structures/cogaps-HybridMatrix.$(OBJEXT) \
+	src/Rpackage/src/data_structures/cogaps-HybridVector.$(OBJEXT) \
 	src/Rpackage/src/data_structures/cogaps-Matrix.$(OBJEXT) \
+	src/Rpackage/src/data_structures/cogaps-SparseIterator.$(OBJEXT) \
+	src/Rpackage/src/data_structures/cogaps-SparseMatrix.$(OBJEXT) \
+	src/Rpackage/src/data_structures/cogaps-SparseVector.$(OBJEXT) \
 	src/Rpackage/src/data_structures/cogaps-Vector.$(OBJEXT) \
 	src/Rpackage/src/file_parser/cogaps-CsvParser.$(OBJEXT) \
+	src/Rpackage/src/file_parser/cogaps-GctParser.$(OBJEXT) \
 	src/Rpackage/src/file_parser/cogaps-FileParser.$(OBJEXT) \
 	src/Rpackage/src/file_parser/cogaps-TsvParser.$(OBJEXT) \
 	src/Rpackage/src/file_parser/cogaps-MtxParser.$(OBJEXT) \
-	src/Rpackage/src/math/cogaps-Algorithms.$(OBJEXT) \
-	src/Rpackage/src/math/cogaps-Random.$(OBJEXT)
+	src/Rpackage/src/gibbs_sampler/cogaps-DenseGibbsSampler.$(OBJEXT) \
+	src/Rpackage/src/gibbs_sampler/cogaps-SparseGibbsSampler.$(OBJEXT) \
+	src/Rpackage/src/math/cogaps-Math.$(OBJEXT) \
+	src/Rpackage/src/math/cogaps-MatrixMath.$(OBJEXT) \
+	src/Rpackage/src/math/cogaps-Random.$(OBJEXT) \
+	src/Rpackage/src/math/cogaps-VectorMath.$(OBJEXT)
 cogaps_OBJECTS = $(am_cogaps_OBJECTS)
 cogaps_DEPENDENCIES =
 cogaps_LINK = $(CXXLD) $(cogaps_CXXFLAGS) $(CXXFLAGS) \
@@ -314,20 +326,32 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 cogaps_SOURCES = \
     src/CoGAPS.cpp \
-    src/Rpackage/src/AtomicDomain.cpp \
-    src/Rpackage/src/GapsDispatcher.cpp \
+    src/Rpackage/src/GapsParameters.cpp \
+    src/Rpackage/src/GapsResult.cpp \
     src/Rpackage/src/GapsRunner.cpp \
     src/Rpackage/src/GapsStatistics.cpp \
-    src/Rpackage/src/GibbsSampler.cpp \
-    src/Rpackage/src/ProposalQueue.cpp \
+    src/Rpackage/src/atomic/AtomAllocator.cpp \
+    src/Rpackage/src/atomic/AtomicDomain.cpp \
+    src/Rpackage/src/atomic/ProposalQueue.cpp \
+    src/Rpackage/src/data_structures/HashSets.cpp \
+    src/Rpackage/src/data_structures/HybridMatrix.cpp \
+    src/Rpackage/src/data_structures/HybridVector.cpp \
     src/Rpackage/src/data_structures/Matrix.cpp \
+    src/Rpackage/src/data_structures/SparseIterator.cpp \
+    src/Rpackage/src/data_structures/SparseMatrix.cpp \
+    src/Rpackage/src/data_structures/SparseVector.cpp \
     src/Rpackage/src/data_structures/Vector.cpp \
     src/Rpackage/src/file_parser/CsvParser.cpp \
+    src/Rpackage/src/file_parser/GctParser.cpp \
     src/Rpackage/src/file_parser/FileParser.cpp \
     src/Rpackage/src/file_parser/TsvParser.cpp \
     src/Rpackage/src/file_parser/MtxParser.cpp \
-    src/Rpackage/src/math/Algorithms.cpp \
-    src/Rpackage/src/math/Random.cpp
+    src/Rpackage/src/gibbs_sampler/DenseGibbsSampler.cpp \
+    src/Rpackage/src/gibbs_sampler/SparseGibbsSampler.cpp \
+    src/Rpackage/src/math/Math.cpp \
+    src/Rpackage/src/math/MatrixMath.cpp \
+    src/Rpackage/src/math/Random.cpp \
+    src/Rpackage/src/math/VectorMath.cpp
 
 cogaps_CPPFLAGS = @GAPS_CPP_FLAGS@
 cogaps_CXXFLAGS = @GAPS_CXX_FLAGS@
@@ -442,10 +466,10 @@ src/Rpackage/src/$(am__dirstamp):
 src/Rpackage/src/$(DEPDIR)/$(am__dirstamp):
 	@$(MKDIR_P) src/Rpackage/src/$(DEPDIR)
 	@: > src/Rpackage/src/$(DEPDIR)/$(am__dirstamp)
-src/Rpackage/src/cogaps-AtomicDomain.$(OBJEXT):  \
+src/Rpackage/src/cogaps-GapsParameters.$(OBJEXT):  \
 	src/Rpackage/src/$(am__dirstamp) \
 	src/Rpackage/src/$(DEPDIR)/$(am__dirstamp)
-src/Rpackage/src/cogaps-GapsDispatcher.$(OBJEXT):  \
+src/Rpackage/src/cogaps-GapsResult.$(OBJEXT):  \
 	src/Rpackage/src/$(am__dirstamp) \
 	src/Rpackage/src/$(DEPDIR)/$(am__dirstamp)
 src/Rpackage/src/cogaps-GapsRunner.$(OBJEXT):  \
@@ -454,19 +478,46 @@ src/Rpackage/src/cogaps-GapsRunner.$(OBJEXT):  \
 src/Rpackage/src/cogaps-GapsStatistics.$(OBJEXT):  \
 	src/Rpackage/src/$(am__dirstamp) \
 	src/Rpackage/src/$(DEPDIR)/$(am__dirstamp)
-src/Rpackage/src/cogaps-GibbsSampler.$(OBJEXT):  \
-	src/Rpackage/src/$(am__dirstamp) \
-	src/Rpackage/src/$(DEPDIR)/$(am__dirstamp)
-src/Rpackage/src/cogaps-ProposalQueue.$(OBJEXT):  \
-	src/Rpackage/src/$(am__dirstamp) \
-	src/Rpackage/src/$(DEPDIR)/$(am__dirstamp)
+src/Rpackage/src/atomic/$(am__dirstamp):
+	@$(MKDIR_P) src/Rpackage/src/atomic
+	@: > src/Rpackage/src/atomic/$(am__dirstamp)
+src/Rpackage/src/atomic/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) src/Rpackage/src/atomic/$(DEPDIR)
+	@: > src/Rpackage/src/atomic/$(DEPDIR)/$(am__dirstamp)
+src/Rpackage/src/atomic/cogaps-AtomAllocator.$(OBJEXT):  \
+	src/Rpackage/src/atomic/$(am__dirstamp) \
+	src/Rpackage/src/atomic/$(DEPDIR)/$(am__dirstamp)
+src/Rpackage/src/atomic/cogaps-AtomicDomain.$(OBJEXT):  \
+	src/Rpackage/src/atomic/$(am__dirstamp) \
+	src/Rpackage/src/atomic/$(DEPDIR)/$(am__dirstamp)
+src/Rpackage/src/atomic/cogaps-ProposalQueue.$(OBJEXT):  \
+	src/Rpackage/src/atomic/$(am__dirstamp) \
+	src/Rpackage/src/atomic/$(DEPDIR)/$(am__dirstamp)
 src/Rpackage/src/data_structures/$(am__dirstamp):
 	@$(MKDIR_P) src/Rpackage/src/data_structures
 	@: > src/Rpackage/src/data_structures/$(am__dirstamp)
 src/Rpackage/src/data_structures/$(DEPDIR)/$(am__dirstamp):
 	@$(MKDIR_P) src/Rpackage/src/data_structures/$(DEPDIR)
 	@: > src/Rpackage/src/data_structures/$(DEPDIR)/$(am__dirstamp)
+src/Rpackage/src/data_structures/cogaps-HashSets.$(OBJEXT):  \
+	src/Rpackage/src/data_structures/$(am__dirstamp) \
+	src/Rpackage/src/data_structures/$(DEPDIR)/$(am__dirstamp)
+src/Rpackage/src/data_structures/cogaps-HybridMatrix.$(OBJEXT):  \
+	src/Rpackage/src/data_structures/$(am__dirstamp) \
+	src/Rpackage/src/data_structures/$(DEPDIR)/$(am__dirstamp)
+src/Rpackage/src/data_structures/cogaps-HybridVector.$(OBJEXT):  \
+	src/Rpackage/src/data_structures/$(am__dirstamp) \
+	src/Rpackage/src/data_structures/$(DEPDIR)/$(am__dirstamp)
 src/Rpackage/src/data_structures/cogaps-Matrix.$(OBJEXT):  \
+	src/Rpackage/src/data_structures/$(am__dirstamp) \
+	src/Rpackage/src/data_structures/$(DEPDIR)/$(am__dirstamp)
+src/Rpackage/src/data_structures/cogaps-SparseIterator.$(OBJEXT):  \
+	src/Rpackage/src/data_structures/$(am__dirstamp) \
+	src/Rpackage/src/data_structures/$(DEPDIR)/$(am__dirstamp)
+src/Rpackage/src/data_structures/cogaps-SparseMatrix.$(OBJEXT):  \
+	src/Rpackage/src/data_structures/$(am__dirstamp) \
+	src/Rpackage/src/data_structures/$(DEPDIR)/$(am__dirstamp)
+src/Rpackage/src/data_structures/cogaps-SparseVector.$(OBJEXT):  \
 	src/Rpackage/src/data_structures/$(am__dirstamp) \
 	src/Rpackage/src/data_structures/$(DEPDIR)/$(am__dirstamp)
 src/Rpackage/src/data_structures/cogaps-Vector.$(OBJEXT):  \
@@ -481,6 +532,9 @@ src/Rpackage/src/file_parser/$(DEPDIR)/$(am__dirstamp):
 src/Rpackage/src/file_parser/cogaps-CsvParser.$(OBJEXT):  \
 	src/Rpackage/src/file_parser/$(am__dirstamp) \
 	src/Rpackage/src/file_parser/$(DEPDIR)/$(am__dirstamp)
+src/Rpackage/src/file_parser/cogaps-GctParser.$(OBJEXT):  \
+	src/Rpackage/src/file_parser/$(am__dirstamp) \
+	src/Rpackage/src/file_parser/$(DEPDIR)/$(am__dirstamp)
 src/Rpackage/src/file_parser/cogaps-FileParser.$(OBJEXT):  \
 	src/Rpackage/src/file_parser/$(am__dirstamp) \
 	src/Rpackage/src/file_parser/$(DEPDIR)/$(am__dirstamp)
@@ -490,16 +544,34 @@ src/Rpackage/src/file_parser/cogaps-TsvParser.$(OBJEXT):  \
 src/Rpackage/src/file_parser/cogaps-MtxParser.$(OBJEXT):  \
 	src/Rpackage/src/file_parser/$(am__dirstamp) \
 	src/Rpackage/src/file_parser/$(DEPDIR)/$(am__dirstamp)
+src/Rpackage/src/gibbs_sampler/$(am__dirstamp):
+	@$(MKDIR_P) src/Rpackage/src/gibbs_sampler
+	@: > src/Rpackage/src/gibbs_sampler/$(am__dirstamp)
+src/Rpackage/src/gibbs_sampler/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) src/Rpackage/src/gibbs_sampler/$(DEPDIR)
+	@: > src/Rpackage/src/gibbs_sampler/$(DEPDIR)/$(am__dirstamp)
+src/Rpackage/src/gibbs_sampler/cogaps-DenseGibbsSampler.$(OBJEXT):  \
+	src/Rpackage/src/gibbs_sampler/$(am__dirstamp) \
+	src/Rpackage/src/gibbs_sampler/$(DEPDIR)/$(am__dirstamp)
+src/Rpackage/src/gibbs_sampler/cogaps-SparseGibbsSampler.$(OBJEXT):  \
+	src/Rpackage/src/gibbs_sampler/$(am__dirstamp) \
+	src/Rpackage/src/gibbs_sampler/$(DEPDIR)/$(am__dirstamp)
 src/Rpackage/src/math/$(am__dirstamp):
 	@$(MKDIR_P) src/Rpackage/src/math
 	@: > src/Rpackage/src/math/$(am__dirstamp)
 src/Rpackage/src/math/$(DEPDIR)/$(am__dirstamp):
 	@$(MKDIR_P) src/Rpackage/src/math/$(DEPDIR)
 	@: > src/Rpackage/src/math/$(DEPDIR)/$(am__dirstamp)
-src/Rpackage/src/math/cogaps-Algorithms.$(OBJEXT):  \
+src/Rpackage/src/math/cogaps-Math.$(OBJEXT):  \
+	src/Rpackage/src/math/$(am__dirstamp) \
+	src/Rpackage/src/math/$(DEPDIR)/$(am__dirstamp)
+src/Rpackage/src/math/cogaps-MatrixMath.$(OBJEXT):  \
 	src/Rpackage/src/math/$(am__dirstamp) \
 	src/Rpackage/src/math/$(DEPDIR)/$(am__dirstamp)
 src/Rpackage/src/math/cogaps-Random.$(OBJEXT):  \
+	src/Rpackage/src/math/$(am__dirstamp) \
+	src/Rpackage/src/math/$(DEPDIR)/$(am__dirstamp)
+src/Rpackage/src/math/cogaps-VectorMath.$(OBJEXT):  \
 	src/Rpackage/src/math/$(am__dirstamp) \
 	src/Rpackage/src/math/$(DEPDIR)/$(am__dirstamp)
 
@@ -511,28 +583,42 @@ mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
 	-rm -f src/*.$(OBJEXT)
 	-rm -f src/Rpackage/src/*.$(OBJEXT)
+	-rm -f src/Rpackage/src/atomic/*.$(OBJEXT)
 	-rm -f src/Rpackage/src/data_structures/*.$(OBJEXT)
 	-rm -f src/Rpackage/src/file_parser/*.$(OBJEXT)
+	-rm -f src/Rpackage/src/gibbs_sampler/*.$(OBJEXT)
 	-rm -f src/Rpackage/src/math/*.$(OBJEXT)
 
 distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@src/$(DEPDIR)/cogaps-CoGAPS.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@src/Rpackage/src/$(DEPDIR)/cogaps-AtomicDomain.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@src/Rpackage/src/$(DEPDIR)/cogaps-GapsDispatcher.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/Rpackage/src/$(DEPDIR)/cogaps-GapsParameters.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/Rpackage/src/$(DEPDIR)/cogaps-GapsResult.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/Rpackage/src/$(DEPDIR)/cogaps-GapsRunner.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/Rpackage/src/$(DEPDIR)/cogaps-GapsStatistics.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@src/Rpackage/src/$(DEPDIR)/cogaps-GibbsSampler.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@src/Rpackage/src/$(DEPDIR)/cogaps-ProposalQueue.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/Rpackage/src/atomic/$(DEPDIR)/cogaps-AtomAllocator.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/Rpackage/src/atomic/$(DEPDIR)/cogaps-AtomicDomain.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/Rpackage/src/atomic/$(DEPDIR)/cogaps-ProposalQueue.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/Rpackage/src/data_structures/$(DEPDIR)/cogaps-HashSets.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/Rpackage/src/data_structures/$(DEPDIR)/cogaps-HybridMatrix.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/Rpackage/src/data_structures/$(DEPDIR)/cogaps-HybridVector.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/Rpackage/src/data_structures/$(DEPDIR)/cogaps-Matrix.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/Rpackage/src/data_structures/$(DEPDIR)/cogaps-SparseIterator.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/Rpackage/src/data_structures/$(DEPDIR)/cogaps-SparseMatrix.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/Rpackage/src/data_structures/$(DEPDIR)/cogaps-SparseVector.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/Rpackage/src/data_structures/$(DEPDIR)/cogaps-Vector.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/Rpackage/src/file_parser/$(DEPDIR)/cogaps-CsvParser.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/Rpackage/src/file_parser/$(DEPDIR)/cogaps-FileParser.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/Rpackage/src/file_parser/$(DEPDIR)/cogaps-GctParser.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/Rpackage/src/file_parser/$(DEPDIR)/cogaps-MtxParser.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/Rpackage/src/file_parser/$(DEPDIR)/cogaps-TsvParser.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@src/Rpackage/src/math/$(DEPDIR)/cogaps-Algorithms.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/Rpackage/src/gibbs_sampler/$(DEPDIR)/cogaps-DenseGibbsSampler.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/Rpackage/src/gibbs_sampler/$(DEPDIR)/cogaps-SparseGibbsSampler.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/Rpackage/src/math/$(DEPDIR)/cogaps-Math.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/Rpackage/src/math/$(DEPDIR)/cogaps-MatrixMath.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/Rpackage/src/math/$(DEPDIR)/cogaps-Random.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@src/Rpackage/src/math/$(DEPDIR)/cogaps-VectorMath.Po@am__quote@
 
 .cpp.o:
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
@@ -564,33 +650,33 @@ src/cogaps-CoGAPS.obj: src/CoGAPS.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -c -o src/cogaps-CoGAPS.obj `if test -f 'src/CoGAPS.cpp'; then $(CYGPATH_W) 'src/CoGAPS.cpp'; else $(CYGPATH_W) '$(srcdir)/src/CoGAPS.cpp'; fi`
 
-src/Rpackage/src/cogaps-AtomicDomain.o: src/Rpackage/src/AtomicDomain.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -MT src/Rpackage/src/cogaps-AtomicDomain.o -MD -MP -MF src/Rpackage/src/$(DEPDIR)/cogaps-AtomicDomain.Tpo -c -o src/Rpackage/src/cogaps-AtomicDomain.o `test -f 'src/Rpackage/src/AtomicDomain.cpp' || echo '$(srcdir)/'`src/Rpackage/src/AtomicDomain.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/Rpackage/src/$(DEPDIR)/cogaps-AtomicDomain.Tpo src/Rpackage/src/$(DEPDIR)/cogaps-AtomicDomain.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/Rpackage/src/AtomicDomain.cpp' object='src/Rpackage/src/cogaps-AtomicDomain.o' libtool=no @AMDEPBACKSLASH@
+src/Rpackage/src/cogaps-GapsParameters.o: src/Rpackage/src/GapsParameters.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -MT src/Rpackage/src/cogaps-GapsParameters.o -MD -MP -MF src/Rpackage/src/$(DEPDIR)/cogaps-GapsParameters.Tpo -c -o src/Rpackage/src/cogaps-GapsParameters.o `test -f 'src/Rpackage/src/GapsParameters.cpp' || echo '$(srcdir)/'`src/Rpackage/src/GapsParameters.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/Rpackage/src/$(DEPDIR)/cogaps-GapsParameters.Tpo src/Rpackage/src/$(DEPDIR)/cogaps-GapsParameters.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/Rpackage/src/GapsParameters.cpp' object='src/Rpackage/src/cogaps-GapsParameters.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -c -o src/Rpackage/src/cogaps-AtomicDomain.o `test -f 'src/Rpackage/src/AtomicDomain.cpp' || echo '$(srcdir)/'`src/Rpackage/src/AtomicDomain.cpp
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -c -o src/Rpackage/src/cogaps-GapsParameters.o `test -f 'src/Rpackage/src/GapsParameters.cpp' || echo '$(srcdir)/'`src/Rpackage/src/GapsParameters.cpp
 
-src/Rpackage/src/cogaps-AtomicDomain.obj: src/Rpackage/src/AtomicDomain.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -MT src/Rpackage/src/cogaps-AtomicDomain.obj -MD -MP -MF src/Rpackage/src/$(DEPDIR)/cogaps-AtomicDomain.Tpo -c -o src/Rpackage/src/cogaps-AtomicDomain.obj `if test -f 'src/Rpackage/src/AtomicDomain.cpp'; then $(CYGPATH_W) 'src/Rpackage/src/AtomicDomain.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Rpackage/src/AtomicDomain.cpp'; fi`
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/Rpackage/src/$(DEPDIR)/cogaps-AtomicDomain.Tpo src/Rpackage/src/$(DEPDIR)/cogaps-AtomicDomain.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/Rpackage/src/AtomicDomain.cpp' object='src/Rpackage/src/cogaps-AtomicDomain.obj' libtool=no @AMDEPBACKSLASH@
+src/Rpackage/src/cogaps-GapsParameters.obj: src/Rpackage/src/GapsParameters.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -MT src/Rpackage/src/cogaps-GapsParameters.obj -MD -MP -MF src/Rpackage/src/$(DEPDIR)/cogaps-GapsParameters.Tpo -c -o src/Rpackage/src/cogaps-GapsParameters.obj `if test -f 'src/Rpackage/src/GapsParameters.cpp'; then $(CYGPATH_W) 'src/Rpackage/src/GapsParameters.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Rpackage/src/GapsParameters.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/Rpackage/src/$(DEPDIR)/cogaps-GapsParameters.Tpo src/Rpackage/src/$(DEPDIR)/cogaps-GapsParameters.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/Rpackage/src/GapsParameters.cpp' object='src/Rpackage/src/cogaps-GapsParameters.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -c -o src/Rpackage/src/cogaps-AtomicDomain.obj `if test -f 'src/Rpackage/src/AtomicDomain.cpp'; then $(CYGPATH_W) 'src/Rpackage/src/AtomicDomain.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Rpackage/src/AtomicDomain.cpp'; fi`
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -c -o src/Rpackage/src/cogaps-GapsParameters.obj `if test -f 'src/Rpackage/src/GapsParameters.cpp'; then $(CYGPATH_W) 'src/Rpackage/src/GapsParameters.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Rpackage/src/GapsParameters.cpp'; fi`
 
-src/Rpackage/src/cogaps-GapsDispatcher.o: src/Rpackage/src/GapsDispatcher.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -MT src/Rpackage/src/cogaps-GapsDispatcher.o -MD -MP -MF src/Rpackage/src/$(DEPDIR)/cogaps-GapsDispatcher.Tpo -c -o src/Rpackage/src/cogaps-GapsDispatcher.o `test -f 'src/Rpackage/src/GapsDispatcher.cpp' || echo '$(srcdir)/'`src/Rpackage/src/GapsDispatcher.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/Rpackage/src/$(DEPDIR)/cogaps-GapsDispatcher.Tpo src/Rpackage/src/$(DEPDIR)/cogaps-GapsDispatcher.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/Rpackage/src/GapsDispatcher.cpp' object='src/Rpackage/src/cogaps-GapsDispatcher.o' libtool=no @AMDEPBACKSLASH@
+src/Rpackage/src/cogaps-GapsResult.o: src/Rpackage/src/GapsResult.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -MT src/Rpackage/src/cogaps-GapsResult.o -MD -MP -MF src/Rpackage/src/$(DEPDIR)/cogaps-GapsResult.Tpo -c -o src/Rpackage/src/cogaps-GapsResult.o `test -f 'src/Rpackage/src/GapsResult.cpp' || echo '$(srcdir)/'`src/Rpackage/src/GapsResult.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/Rpackage/src/$(DEPDIR)/cogaps-GapsResult.Tpo src/Rpackage/src/$(DEPDIR)/cogaps-GapsResult.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/Rpackage/src/GapsResult.cpp' object='src/Rpackage/src/cogaps-GapsResult.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -c -o src/Rpackage/src/cogaps-GapsDispatcher.o `test -f 'src/Rpackage/src/GapsDispatcher.cpp' || echo '$(srcdir)/'`src/Rpackage/src/GapsDispatcher.cpp
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -c -o src/Rpackage/src/cogaps-GapsResult.o `test -f 'src/Rpackage/src/GapsResult.cpp' || echo '$(srcdir)/'`src/Rpackage/src/GapsResult.cpp
 
-src/Rpackage/src/cogaps-GapsDispatcher.obj: src/Rpackage/src/GapsDispatcher.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -MT src/Rpackage/src/cogaps-GapsDispatcher.obj -MD -MP -MF src/Rpackage/src/$(DEPDIR)/cogaps-GapsDispatcher.Tpo -c -o src/Rpackage/src/cogaps-GapsDispatcher.obj `if test -f 'src/Rpackage/src/GapsDispatcher.cpp'; then $(CYGPATH_W) 'src/Rpackage/src/GapsDispatcher.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Rpackage/src/GapsDispatcher.cpp'; fi`
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/Rpackage/src/$(DEPDIR)/cogaps-GapsDispatcher.Tpo src/Rpackage/src/$(DEPDIR)/cogaps-GapsDispatcher.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/Rpackage/src/GapsDispatcher.cpp' object='src/Rpackage/src/cogaps-GapsDispatcher.obj' libtool=no @AMDEPBACKSLASH@
+src/Rpackage/src/cogaps-GapsResult.obj: src/Rpackage/src/GapsResult.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -MT src/Rpackage/src/cogaps-GapsResult.obj -MD -MP -MF src/Rpackage/src/$(DEPDIR)/cogaps-GapsResult.Tpo -c -o src/Rpackage/src/cogaps-GapsResult.obj `if test -f 'src/Rpackage/src/GapsResult.cpp'; then $(CYGPATH_W) 'src/Rpackage/src/GapsResult.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Rpackage/src/GapsResult.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/Rpackage/src/$(DEPDIR)/cogaps-GapsResult.Tpo src/Rpackage/src/$(DEPDIR)/cogaps-GapsResult.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/Rpackage/src/GapsResult.cpp' object='src/Rpackage/src/cogaps-GapsResult.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -c -o src/Rpackage/src/cogaps-GapsDispatcher.obj `if test -f 'src/Rpackage/src/GapsDispatcher.cpp'; then $(CYGPATH_W) 'src/Rpackage/src/GapsDispatcher.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Rpackage/src/GapsDispatcher.cpp'; fi`
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -c -o src/Rpackage/src/cogaps-GapsResult.obj `if test -f 'src/Rpackage/src/GapsResult.cpp'; then $(CYGPATH_W) 'src/Rpackage/src/GapsResult.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Rpackage/src/GapsResult.cpp'; fi`
 
 src/Rpackage/src/cogaps-GapsRunner.o: src/Rpackage/src/GapsRunner.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -MT src/Rpackage/src/cogaps-GapsRunner.o -MD -MP -MF src/Rpackage/src/$(DEPDIR)/cogaps-GapsRunner.Tpo -c -o src/Rpackage/src/cogaps-GapsRunner.o `test -f 'src/Rpackage/src/GapsRunner.cpp' || echo '$(srcdir)/'`src/Rpackage/src/GapsRunner.cpp
@@ -620,33 +706,89 @@ src/Rpackage/src/cogaps-GapsStatistics.obj: src/Rpackage/src/GapsStatistics.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -c -o src/Rpackage/src/cogaps-GapsStatistics.obj `if test -f 'src/Rpackage/src/GapsStatistics.cpp'; then $(CYGPATH_W) 'src/Rpackage/src/GapsStatistics.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Rpackage/src/GapsStatistics.cpp'; fi`
 
-src/Rpackage/src/cogaps-GibbsSampler.o: src/Rpackage/src/GibbsSampler.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -MT src/Rpackage/src/cogaps-GibbsSampler.o -MD -MP -MF src/Rpackage/src/$(DEPDIR)/cogaps-GibbsSampler.Tpo -c -o src/Rpackage/src/cogaps-GibbsSampler.o `test -f 'src/Rpackage/src/GibbsSampler.cpp' || echo '$(srcdir)/'`src/Rpackage/src/GibbsSampler.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/Rpackage/src/$(DEPDIR)/cogaps-GibbsSampler.Tpo src/Rpackage/src/$(DEPDIR)/cogaps-GibbsSampler.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/Rpackage/src/GibbsSampler.cpp' object='src/Rpackage/src/cogaps-GibbsSampler.o' libtool=no @AMDEPBACKSLASH@
+src/Rpackage/src/atomic/cogaps-AtomAllocator.o: src/Rpackage/src/atomic/AtomAllocator.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -MT src/Rpackage/src/atomic/cogaps-AtomAllocator.o -MD -MP -MF src/Rpackage/src/atomic/$(DEPDIR)/cogaps-AtomAllocator.Tpo -c -o src/Rpackage/src/atomic/cogaps-AtomAllocator.o `test -f 'src/Rpackage/src/atomic/AtomAllocator.cpp' || echo '$(srcdir)/'`src/Rpackage/src/atomic/AtomAllocator.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/Rpackage/src/atomic/$(DEPDIR)/cogaps-AtomAllocator.Tpo src/Rpackage/src/atomic/$(DEPDIR)/cogaps-AtomAllocator.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/Rpackage/src/atomic/AtomAllocator.cpp' object='src/Rpackage/src/atomic/cogaps-AtomAllocator.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -c -o src/Rpackage/src/cogaps-GibbsSampler.o `test -f 'src/Rpackage/src/GibbsSampler.cpp' || echo '$(srcdir)/'`src/Rpackage/src/GibbsSampler.cpp
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -c -o src/Rpackage/src/atomic/cogaps-AtomAllocator.o `test -f 'src/Rpackage/src/atomic/AtomAllocator.cpp' || echo '$(srcdir)/'`src/Rpackage/src/atomic/AtomAllocator.cpp
 
-src/Rpackage/src/cogaps-GibbsSampler.obj: src/Rpackage/src/GibbsSampler.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -MT src/Rpackage/src/cogaps-GibbsSampler.obj -MD -MP -MF src/Rpackage/src/$(DEPDIR)/cogaps-GibbsSampler.Tpo -c -o src/Rpackage/src/cogaps-GibbsSampler.obj `if test -f 'src/Rpackage/src/GibbsSampler.cpp'; then $(CYGPATH_W) 'src/Rpackage/src/GibbsSampler.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Rpackage/src/GibbsSampler.cpp'; fi`
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/Rpackage/src/$(DEPDIR)/cogaps-GibbsSampler.Tpo src/Rpackage/src/$(DEPDIR)/cogaps-GibbsSampler.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/Rpackage/src/GibbsSampler.cpp' object='src/Rpackage/src/cogaps-GibbsSampler.obj' libtool=no @AMDEPBACKSLASH@
+src/Rpackage/src/atomic/cogaps-AtomAllocator.obj: src/Rpackage/src/atomic/AtomAllocator.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -MT src/Rpackage/src/atomic/cogaps-AtomAllocator.obj -MD -MP -MF src/Rpackage/src/atomic/$(DEPDIR)/cogaps-AtomAllocator.Tpo -c -o src/Rpackage/src/atomic/cogaps-AtomAllocator.obj `if test -f 'src/Rpackage/src/atomic/AtomAllocator.cpp'; then $(CYGPATH_W) 'src/Rpackage/src/atomic/AtomAllocator.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Rpackage/src/atomic/AtomAllocator.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/Rpackage/src/atomic/$(DEPDIR)/cogaps-AtomAllocator.Tpo src/Rpackage/src/atomic/$(DEPDIR)/cogaps-AtomAllocator.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/Rpackage/src/atomic/AtomAllocator.cpp' object='src/Rpackage/src/atomic/cogaps-AtomAllocator.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -c -o src/Rpackage/src/cogaps-GibbsSampler.obj `if test -f 'src/Rpackage/src/GibbsSampler.cpp'; then $(CYGPATH_W) 'src/Rpackage/src/GibbsSampler.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Rpackage/src/GibbsSampler.cpp'; fi`
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -c -o src/Rpackage/src/atomic/cogaps-AtomAllocator.obj `if test -f 'src/Rpackage/src/atomic/AtomAllocator.cpp'; then $(CYGPATH_W) 'src/Rpackage/src/atomic/AtomAllocator.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Rpackage/src/atomic/AtomAllocator.cpp'; fi`
 
-src/Rpackage/src/cogaps-ProposalQueue.o: src/Rpackage/src/ProposalQueue.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -MT src/Rpackage/src/cogaps-ProposalQueue.o -MD -MP -MF src/Rpackage/src/$(DEPDIR)/cogaps-ProposalQueue.Tpo -c -o src/Rpackage/src/cogaps-ProposalQueue.o `test -f 'src/Rpackage/src/ProposalQueue.cpp' || echo '$(srcdir)/'`src/Rpackage/src/ProposalQueue.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/Rpackage/src/$(DEPDIR)/cogaps-ProposalQueue.Tpo src/Rpackage/src/$(DEPDIR)/cogaps-ProposalQueue.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/Rpackage/src/ProposalQueue.cpp' object='src/Rpackage/src/cogaps-ProposalQueue.o' libtool=no @AMDEPBACKSLASH@
+src/Rpackage/src/atomic/cogaps-AtomicDomain.o: src/Rpackage/src/atomic/AtomicDomain.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -MT src/Rpackage/src/atomic/cogaps-AtomicDomain.o -MD -MP -MF src/Rpackage/src/atomic/$(DEPDIR)/cogaps-AtomicDomain.Tpo -c -o src/Rpackage/src/atomic/cogaps-AtomicDomain.o `test -f 'src/Rpackage/src/atomic/AtomicDomain.cpp' || echo '$(srcdir)/'`src/Rpackage/src/atomic/AtomicDomain.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/Rpackage/src/atomic/$(DEPDIR)/cogaps-AtomicDomain.Tpo src/Rpackage/src/atomic/$(DEPDIR)/cogaps-AtomicDomain.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/Rpackage/src/atomic/AtomicDomain.cpp' object='src/Rpackage/src/atomic/cogaps-AtomicDomain.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -c -o src/Rpackage/src/cogaps-ProposalQueue.o `test -f 'src/Rpackage/src/ProposalQueue.cpp' || echo '$(srcdir)/'`src/Rpackage/src/ProposalQueue.cpp
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -c -o src/Rpackage/src/atomic/cogaps-AtomicDomain.o `test -f 'src/Rpackage/src/atomic/AtomicDomain.cpp' || echo '$(srcdir)/'`src/Rpackage/src/atomic/AtomicDomain.cpp
 
-src/Rpackage/src/cogaps-ProposalQueue.obj: src/Rpackage/src/ProposalQueue.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -MT src/Rpackage/src/cogaps-ProposalQueue.obj -MD -MP -MF src/Rpackage/src/$(DEPDIR)/cogaps-ProposalQueue.Tpo -c -o src/Rpackage/src/cogaps-ProposalQueue.obj `if test -f 'src/Rpackage/src/ProposalQueue.cpp'; then $(CYGPATH_W) 'src/Rpackage/src/ProposalQueue.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Rpackage/src/ProposalQueue.cpp'; fi`
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/Rpackage/src/$(DEPDIR)/cogaps-ProposalQueue.Tpo src/Rpackage/src/$(DEPDIR)/cogaps-ProposalQueue.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/Rpackage/src/ProposalQueue.cpp' object='src/Rpackage/src/cogaps-ProposalQueue.obj' libtool=no @AMDEPBACKSLASH@
+src/Rpackage/src/atomic/cogaps-AtomicDomain.obj: src/Rpackage/src/atomic/AtomicDomain.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -MT src/Rpackage/src/atomic/cogaps-AtomicDomain.obj -MD -MP -MF src/Rpackage/src/atomic/$(DEPDIR)/cogaps-AtomicDomain.Tpo -c -o src/Rpackage/src/atomic/cogaps-AtomicDomain.obj `if test -f 'src/Rpackage/src/atomic/AtomicDomain.cpp'; then $(CYGPATH_W) 'src/Rpackage/src/atomic/AtomicDomain.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Rpackage/src/atomic/AtomicDomain.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/Rpackage/src/atomic/$(DEPDIR)/cogaps-AtomicDomain.Tpo src/Rpackage/src/atomic/$(DEPDIR)/cogaps-AtomicDomain.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/Rpackage/src/atomic/AtomicDomain.cpp' object='src/Rpackage/src/atomic/cogaps-AtomicDomain.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -c -o src/Rpackage/src/cogaps-ProposalQueue.obj `if test -f 'src/Rpackage/src/ProposalQueue.cpp'; then $(CYGPATH_W) 'src/Rpackage/src/ProposalQueue.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Rpackage/src/ProposalQueue.cpp'; fi`
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -c -o src/Rpackage/src/atomic/cogaps-AtomicDomain.obj `if test -f 'src/Rpackage/src/atomic/AtomicDomain.cpp'; then $(CYGPATH_W) 'src/Rpackage/src/atomic/AtomicDomain.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Rpackage/src/atomic/AtomicDomain.cpp'; fi`
+
+src/Rpackage/src/atomic/cogaps-ProposalQueue.o: src/Rpackage/src/atomic/ProposalQueue.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -MT src/Rpackage/src/atomic/cogaps-ProposalQueue.o -MD -MP -MF src/Rpackage/src/atomic/$(DEPDIR)/cogaps-ProposalQueue.Tpo -c -o src/Rpackage/src/atomic/cogaps-ProposalQueue.o `test -f 'src/Rpackage/src/atomic/ProposalQueue.cpp' || echo '$(srcdir)/'`src/Rpackage/src/atomic/ProposalQueue.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/Rpackage/src/atomic/$(DEPDIR)/cogaps-ProposalQueue.Tpo src/Rpackage/src/atomic/$(DEPDIR)/cogaps-ProposalQueue.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/Rpackage/src/atomic/ProposalQueue.cpp' object='src/Rpackage/src/atomic/cogaps-ProposalQueue.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -c -o src/Rpackage/src/atomic/cogaps-ProposalQueue.o `test -f 'src/Rpackage/src/atomic/ProposalQueue.cpp' || echo '$(srcdir)/'`src/Rpackage/src/atomic/ProposalQueue.cpp
+
+src/Rpackage/src/atomic/cogaps-ProposalQueue.obj: src/Rpackage/src/atomic/ProposalQueue.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -MT src/Rpackage/src/atomic/cogaps-ProposalQueue.obj -MD -MP -MF src/Rpackage/src/atomic/$(DEPDIR)/cogaps-ProposalQueue.Tpo -c -o src/Rpackage/src/atomic/cogaps-ProposalQueue.obj `if test -f 'src/Rpackage/src/atomic/ProposalQueue.cpp'; then $(CYGPATH_W) 'src/Rpackage/src/atomic/ProposalQueue.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Rpackage/src/atomic/ProposalQueue.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/Rpackage/src/atomic/$(DEPDIR)/cogaps-ProposalQueue.Tpo src/Rpackage/src/atomic/$(DEPDIR)/cogaps-ProposalQueue.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/Rpackage/src/atomic/ProposalQueue.cpp' object='src/Rpackage/src/atomic/cogaps-ProposalQueue.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -c -o src/Rpackage/src/atomic/cogaps-ProposalQueue.obj `if test -f 'src/Rpackage/src/atomic/ProposalQueue.cpp'; then $(CYGPATH_W) 'src/Rpackage/src/atomic/ProposalQueue.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Rpackage/src/atomic/ProposalQueue.cpp'; fi`
+
+src/Rpackage/src/data_structures/cogaps-HashSets.o: src/Rpackage/src/data_structures/HashSets.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -MT src/Rpackage/src/data_structures/cogaps-HashSets.o -MD -MP -MF src/Rpackage/src/data_structures/$(DEPDIR)/cogaps-HashSets.Tpo -c -o src/Rpackage/src/data_structures/cogaps-HashSets.o `test -f 'src/Rpackage/src/data_structures/HashSets.cpp' || echo '$(srcdir)/'`src/Rpackage/src/data_structures/HashSets.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/Rpackage/src/data_structures/$(DEPDIR)/cogaps-HashSets.Tpo src/Rpackage/src/data_structures/$(DEPDIR)/cogaps-HashSets.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/Rpackage/src/data_structures/HashSets.cpp' object='src/Rpackage/src/data_structures/cogaps-HashSets.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -c -o src/Rpackage/src/data_structures/cogaps-HashSets.o `test -f 'src/Rpackage/src/data_structures/HashSets.cpp' || echo '$(srcdir)/'`src/Rpackage/src/data_structures/HashSets.cpp
+
+src/Rpackage/src/data_structures/cogaps-HashSets.obj: src/Rpackage/src/data_structures/HashSets.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -MT src/Rpackage/src/data_structures/cogaps-HashSets.obj -MD -MP -MF src/Rpackage/src/data_structures/$(DEPDIR)/cogaps-HashSets.Tpo -c -o src/Rpackage/src/data_structures/cogaps-HashSets.obj `if test -f 'src/Rpackage/src/data_structures/HashSets.cpp'; then $(CYGPATH_W) 'src/Rpackage/src/data_structures/HashSets.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Rpackage/src/data_structures/HashSets.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/Rpackage/src/data_structures/$(DEPDIR)/cogaps-HashSets.Tpo src/Rpackage/src/data_structures/$(DEPDIR)/cogaps-HashSets.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/Rpackage/src/data_structures/HashSets.cpp' object='src/Rpackage/src/data_structures/cogaps-HashSets.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -c -o src/Rpackage/src/data_structures/cogaps-HashSets.obj `if test -f 'src/Rpackage/src/data_structures/HashSets.cpp'; then $(CYGPATH_W) 'src/Rpackage/src/data_structures/HashSets.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Rpackage/src/data_structures/HashSets.cpp'; fi`
+
+src/Rpackage/src/data_structures/cogaps-HybridMatrix.o: src/Rpackage/src/data_structures/HybridMatrix.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -MT src/Rpackage/src/data_structures/cogaps-HybridMatrix.o -MD -MP -MF src/Rpackage/src/data_structures/$(DEPDIR)/cogaps-HybridMatrix.Tpo -c -o src/Rpackage/src/data_structures/cogaps-HybridMatrix.o `test -f 'src/Rpackage/src/data_structures/HybridMatrix.cpp' || echo '$(srcdir)/'`src/Rpackage/src/data_structures/HybridMatrix.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/Rpackage/src/data_structures/$(DEPDIR)/cogaps-HybridMatrix.Tpo src/Rpackage/src/data_structures/$(DEPDIR)/cogaps-HybridMatrix.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/Rpackage/src/data_structures/HybridMatrix.cpp' object='src/Rpackage/src/data_structures/cogaps-HybridMatrix.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -c -o src/Rpackage/src/data_structures/cogaps-HybridMatrix.o `test -f 'src/Rpackage/src/data_structures/HybridMatrix.cpp' || echo '$(srcdir)/'`src/Rpackage/src/data_structures/HybridMatrix.cpp
+
+src/Rpackage/src/data_structures/cogaps-HybridMatrix.obj: src/Rpackage/src/data_structures/HybridMatrix.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -MT src/Rpackage/src/data_structures/cogaps-HybridMatrix.obj -MD -MP -MF src/Rpackage/src/data_structures/$(DEPDIR)/cogaps-HybridMatrix.Tpo -c -o src/Rpackage/src/data_structures/cogaps-HybridMatrix.obj `if test -f 'src/Rpackage/src/data_structures/HybridMatrix.cpp'; then $(CYGPATH_W) 'src/Rpackage/src/data_structures/HybridMatrix.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Rpackage/src/data_structures/HybridMatrix.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/Rpackage/src/data_structures/$(DEPDIR)/cogaps-HybridMatrix.Tpo src/Rpackage/src/data_structures/$(DEPDIR)/cogaps-HybridMatrix.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/Rpackage/src/data_structures/HybridMatrix.cpp' object='src/Rpackage/src/data_structures/cogaps-HybridMatrix.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -c -o src/Rpackage/src/data_structures/cogaps-HybridMatrix.obj `if test -f 'src/Rpackage/src/data_structures/HybridMatrix.cpp'; then $(CYGPATH_W) 'src/Rpackage/src/data_structures/HybridMatrix.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Rpackage/src/data_structures/HybridMatrix.cpp'; fi`
+
+src/Rpackage/src/data_structures/cogaps-HybridVector.o: src/Rpackage/src/data_structures/HybridVector.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -MT src/Rpackage/src/data_structures/cogaps-HybridVector.o -MD -MP -MF src/Rpackage/src/data_structures/$(DEPDIR)/cogaps-HybridVector.Tpo -c -o src/Rpackage/src/data_structures/cogaps-HybridVector.o `test -f 'src/Rpackage/src/data_structures/HybridVector.cpp' || echo '$(srcdir)/'`src/Rpackage/src/data_structures/HybridVector.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/Rpackage/src/data_structures/$(DEPDIR)/cogaps-HybridVector.Tpo src/Rpackage/src/data_structures/$(DEPDIR)/cogaps-HybridVector.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/Rpackage/src/data_structures/HybridVector.cpp' object='src/Rpackage/src/data_structures/cogaps-HybridVector.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -c -o src/Rpackage/src/data_structures/cogaps-HybridVector.o `test -f 'src/Rpackage/src/data_structures/HybridVector.cpp' || echo '$(srcdir)/'`src/Rpackage/src/data_structures/HybridVector.cpp
+
+src/Rpackage/src/data_structures/cogaps-HybridVector.obj: src/Rpackage/src/data_structures/HybridVector.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -MT src/Rpackage/src/data_structures/cogaps-HybridVector.obj -MD -MP -MF src/Rpackage/src/data_structures/$(DEPDIR)/cogaps-HybridVector.Tpo -c -o src/Rpackage/src/data_structures/cogaps-HybridVector.obj `if test -f 'src/Rpackage/src/data_structures/HybridVector.cpp'; then $(CYGPATH_W) 'src/Rpackage/src/data_structures/HybridVector.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Rpackage/src/data_structures/HybridVector.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/Rpackage/src/data_structures/$(DEPDIR)/cogaps-HybridVector.Tpo src/Rpackage/src/data_structures/$(DEPDIR)/cogaps-HybridVector.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/Rpackage/src/data_structures/HybridVector.cpp' object='src/Rpackage/src/data_structures/cogaps-HybridVector.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -c -o src/Rpackage/src/data_structures/cogaps-HybridVector.obj `if test -f 'src/Rpackage/src/data_structures/HybridVector.cpp'; then $(CYGPATH_W) 'src/Rpackage/src/data_structures/HybridVector.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Rpackage/src/data_structures/HybridVector.cpp'; fi`
 
 src/Rpackage/src/data_structures/cogaps-Matrix.o: src/Rpackage/src/data_structures/Matrix.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -MT src/Rpackage/src/data_structures/cogaps-Matrix.o -MD -MP -MF src/Rpackage/src/data_structures/$(DEPDIR)/cogaps-Matrix.Tpo -c -o src/Rpackage/src/data_structures/cogaps-Matrix.o `test -f 'src/Rpackage/src/data_structures/Matrix.cpp' || echo '$(srcdir)/'`src/Rpackage/src/data_structures/Matrix.cpp
@@ -661,6 +803,48 @@ src/Rpackage/src/data_structures/cogaps-Matrix.obj: src/Rpackage/src/data_struct
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/Rpackage/src/data_structures/Matrix.cpp' object='src/Rpackage/src/data_structures/cogaps-Matrix.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -c -o src/Rpackage/src/data_structures/cogaps-Matrix.obj `if test -f 'src/Rpackage/src/data_structures/Matrix.cpp'; then $(CYGPATH_W) 'src/Rpackage/src/data_structures/Matrix.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Rpackage/src/data_structures/Matrix.cpp'; fi`
+
+src/Rpackage/src/data_structures/cogaps-SparseIterator.o: src/Rpackage/src/data_structures/SparseIterator.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -MT src/Rpackage/src/data_structures/cogaps-SparseIterator.o -MD -MP -MF src/Rpackage/src/data_structures/$(DEPDIR)/cogaps-SparseIterator.Tpo -c -o src/Rpackage/src/data_structures/cogaps-SparseIterator.o `test -f 'src/Rpackage/src/data_structures/SparseIterator.cpp' || echo '$(srcdir)/'`src/Rpackage/src/data_structures/SparseIterator.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/Rpackage/src/data_structures/$(DEPDIR)/cogaps-SparseIterator.Tpo src/Rpackage/src/data_structures/$(DEPDIR)/cogaps-SparseIterator.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/Rpackage/src/data_structures/SparseIterator.cpp' object='src/Rpackage/src/data_structures/cogaps-SparseIterator.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -c -o src/Rpackage/src/data_structures/cogaps-SparseIterator.o `test -f 'src/Rpackage/src/data_structures/SparseIterator.cpp' || echo '$(srcdir)/'`src/Rpackage/src/data_structures/SparseIterator.cpp
+
+src/Rpackage/src/data_structures/cogaps-SparseIterator.obj: src/Rpackage/src/data_structures/SparseIterator.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -MT src/Rpackage/src/data_structures/cogaps-SparseIterator.obj -MD -MP -MF src/Rpackage/src/data_structures/$(DEPDIR)/cogaps-SparseIterator.Tpo -c -o src/Rpackage/src/data_structures/cogaps-SparseIterator.obj `if test -f 'src/Rpackage/src/data_structures/SparseIterator.cpp'; then $(CYGPATH_W) 'src/Rpackage/src/data_structures/SparseIterator.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Rpackage/src/data_structures/SparseIterator.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/Rpackage/src/data_structures/$(DEPDIR)/cogaps-SparseIterator.Tpo src/Rpackage/src/data_structures/$(DEPDIR)/cogaps-SparseIterator.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/Rpackage/src/data_structures/SparseIterator.cpp' object='src/Rpackage/src/data_structures/cogaps-SparseIterator.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -c -o src/Rpackage/src/data_structures/cogaps-SparseIterator.obj `if test -f 'src/Rpackage/src/data_structures/SparseIterator.cpp'; then $(CYGPATH_W) 'src/Rpackage/src/data_structures/SparseIterator.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Rpackage/src/data_structures/SparseIterator.cpp'; fi`
+
+src/Rpackage/src/data_structures/cogaps-SparseMatrix.o: src/Rpackage/src/data_structures/SparseMatrix.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -MT src/Rpackage/src/data_structures/cogaps-SparseMatrix.o -MD -MP -MF src/Rpackage/src/data_structures/$(DEPDIR)/cogaps-SparseMatrix.Tpo -c -o src/Rpackage/src/data_structures/cogaps-SparseMatrix.o `test -f 'src/Rpackage/src/data_structures/SparseMatrix.cpp' || echo '$(srcdir)/'`src/Rpackage/src/data_structures/SparseMatrix.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/Rpackage/src/data_structures/$(DEPDIR)/cogaps-SparseMatrix.Tpo src/Rpackage/src/data_structures/$(DEPDIR)/cogaps-SparseMatrix.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/Rpackage/src/data_structures/SparseMatrix.cpp' object='src/Rpackage/src/data_structures/cogaps-SparseMatrix.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -c -o src/Rpackage/src/data_structures/cogaps-SparseMatrix.o `test -f 'src/Rpackage/src/data_structures/SparseMatrix.cpp' || echo '$(srcdir)/'`src/Rpackage/src/data_structures/SparseMatrix.cpp
+
+src/Rpackage/src/data_structures/cogaps-SparseMatrix.obj: src/Rpackage/src/data_structures/SparseMatrix.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -MT src/Rpackage/src/data_structures/cogaps-SparseMatrix.obj -MD -MP -MF src/Rpackage/src/data_structures/$(DEPDIR)/cogaps-SparseMatrix.Tpo -c -o src/Rpackage/src/data_structures/cogaps-SparseMatrix.obj `if test -f 'src/Rpackage/src/data_structures/SparseMatrix.cpp'; then $(CYGPATH_W) 'src/Rpackage/src/data_structures/SparseMatrix.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Rpackage/src/data_structures/SparseMatrix.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/Rpackage/src/data_structures/$(DEPDIR)/cogaps-SparseMatrix.Tpo src/Rpackage/src/data_structures/$(DEPDIR)/cogaps-SparseMatrix.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/Rpackage/src/data_structures/SparseMatrix.cpp' object='src/Rpackage/src/data_structures/cogaps-SparseMatrix.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -c -o src/Rpackage/src/data_structures/cogaps-SparseMatrix.obj `if test -f 'src/Rpackage/src/data_structures/SparseMatrix.cpp'; then $(CYGPATH_W) 'src/Rpackage/src/data_structures/SparseMatrix.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Rpackage/src/data_structures/SparseMatrix.cpp'; fi`
+
+src/Rpackage/src/data_structures/cogaps-SparseVector.o: src/Rpackage/src/data_structures/SparseVector.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -MT src/Rpackage/src/data_structures/cogaps-SparseVector.o -MD -MP -MF src/Rpackage/src/data_structures/$(DEPDIR)/cogaps-SparseVector.Tpo -c -o src/Rpackage/src/data_structures/cogaps-SparseVector.o `test -f 'src/Rpackage/src/data_structures/SparseVector.cpp' || echo '$(srcdir)/'`src/Rpackage/src/data_structures/SparseVector.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/Rpackage/src/data_structures/$(DEPDIR)/cogaps-SparseVector.Tpo src/Rpackage/src/data_structures/$(DEPDIR)/cogaps-SparseVector.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/Rpackage/src/data_structures/SparseVector.cpp' object='src/Rpackage/src/data_structures/cogaps-SparseVector.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -c -o src/Rpackage/src/data_structures/cogaps-SparseVector.o `test -f 'src/Rpackage/src/data_structures/SparseVector.cpp' || echo '$(srcdir)/'`src/Rpackage/src/data_structures/SparseVector.cpp
+
+src/Rpackage/src/data_structures/cogaps-SparseVector.obj: src/Rpackage/src/data_structures/SparseVector.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -MT src/Rpackage/src/data_structures/cogaps-SparseVector.obj -MD -MP -MF src/Rpackage/src/data_structures/$(DEPDIR)/cogaps-SparseVector.Tpo -c -o src/Rpackage/src/data_structures/cogaps-SparseVector.obj `if test -f 'src/Rpackage/src/data_structures/SparseVector.cpp'; then $(CYGPATH_W) 'src/Rpackage/src/data_structures/SparseVector.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Rpackage/src/data_structures/SparseVector.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/Rpackage/src/data_structures/$(DEPDIR)/cogaps-SparseVector.Tpo src/Rpackage/src/data_structures/$(DEPDIR)/cogaps-SparseVector.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/Rpackage/src/data_structures/SparseVector.cpp' object='src/Rpackage/src/data_structures/cogaps-SparseVector.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -c -o src/Rpackage/src/data_structures/cogaps-SparseVector.obj `if test -f 'src/Rpackage/src/data_structures/SparseVector.cpp'; then $(CYGPATH_W) 'src/Rpackage/src/data_structures/SparseVector.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Rpackage/src/data_structures/SparseVector.cpp'; fi`
 
 src/Rpackage/src/data_structures/cogaps-Vector.o: src/Rpackage/src/data_structures/Vector.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -MT src/Rpackage/src/data_structures/cogaps-Vector.o -MD -MP -MF src/Rpackage/src/data_structures/$(DEPDIR)/cogaps-Vector.Tpo -c -o src/Rpackage/src/data_structures/cogaps-Vector.o `test -f 'src/Rpackage/src/data_structures/Vector.cpp' || echo '$(srcdir)/'`src/Rpackage/src/data_structures/Vector.cpp
@@ -689,6 +873,20 @@ src/Rpackage/src/file_parser/cogaps-CsvParser.obj: src/Rpackage/src/file_parser/
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/Rpackage/src/file_parser/CsvParser.cpp' object='src/Rpackage/src/file_parser/cogaps-CsvParser.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -c -o src/Rpackage/src/file_parser/cogaps-CsvParser.obj `if test -f 'src/Rpackage/src/file_parser/CsvParser.cpp'; then $(CYGPATH_W) 'src/Rpackage/src/file_parser/CsvParser.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Rpackage/src/file_parser/CsvParser.cpp'; fi`
+
+src/Rpackage/src/file_parser/cogaps-GctParser.o: src/Rpackage/src/file_parser/GctParser.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -MT src/Rpackage/src/file_parser/cogaps-GctParser.o -MD -MP -MF src/Rpackage/src/file_parser/$(DEPDIR)/cogaps-GctParser.Tpo -c -o src/Rpackage/src/file_parser/cogaps-GctParser.o `test -f 'src/Rpackage/src/file_parser/GctParser.cpp' || echo '$(srcdir)/'`src/Rpackage/src/file_parser/GctParser.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/Rpackage/src/file_parser/$(DEPDIR)/cogaps-GctParser.Tpo src/Rpackage/src/file_parser/$(DEPDIR)/cogaps-GctParser.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/Rpackage/src/file_parser/GctParser.cpp' object='src/Rpackage/src/file_parser/cogaps-GctParser.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -c -o src/Rpackage/src/file_parser/cogaps-GctParser.o `test -f 'src/Rpackage/src/file_parser/GctParser.cpp' || echo '$(srcdir)/'`src/Rpackage/src/file_parser/GctParser.cpp
+
+src/Rpackage/src/file_parser/cogaps-GctParser.obj: src/Rpackage/src/file_parser/GctParser.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -MT src/Rpackage/src/file_parser/cogaps-GctParser.obj -MD -MP -MF src/Rpackage/src/file_parser/$(DEPDIR)/cogaps-GctParser.Tpo -c -o src/Rpackage/src/file_parser/cogaps-GctParser.obj `if test -f 'src/Rpackage/src/file_parser/GctParser.cpp'; then $(CYGPATH_W) 'src/Rpackage/src/file_parser/GctParser.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Rpackage/src/file_parser/GctParser.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/Rpackage/src/file_parser/$(DEPDIR)/cogaps-GctParser.Tpo src/Rpackage/src/file_parser/$(DEPDIR)/cogaps-GctParser.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/Rpackage/src/file_parser/GctParser.cpp' object='src/Rpackage/src/file_parser/cogaps-GctParser.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -c -o src/Rpackage/src/file_parser/cogaps-GctParser.obj `if test -f 'src/Rpackage/src/file_parser/GctParser.cpp'; then $(CYGPATH_W) 'src/Rpackage/src/file_parser/GctParser.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Rpackage/src/file_parser/GctParser.cpp'; fi`
 
 src/Rpackage/src/file_parser/cogaps-FileParser.o: src/Rpackage/src/file_parser/FileParser.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -MT src/Rpackage/src/file_parser/cogaps-FileParser.o -MD -MP -MF src/Rpackage/src/file_parser/$(DEPDIR)/cogaps-FileParser.Tpo -c -o src/Rpackage/src/file_parser/cogaps-FileParser.o `test -f 'src/Rpackage/src/file_parser/FileParser.cpp' || echo '$(srcdir)/'`src/Rpackage/src/file_parser/FileParser.cpp
@@ -732,19 +930,61 @@ src/Rpackage/src/file_parser/cogaps-MtxParser.obj: src/Rpackage/src/file_parser/
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -c -o src/Rpackage/src/file_parser/cogaps-MtxParser.obj `if test -f 'src/Rpackage/src/file_parser/MtxParser.cpp'; then $(CYGPATH_W) 'src/Rpackage/src/file_parser/MtxParser.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Rpackage/src/file_parser/MtxParser.cpp'; fi`
 
-src/Rpackage/src/math/cogaps-Algorithms.o: src/Rpackage/src/math/Algorithms.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -MT src/Rpackage/src/math/cogaps-Algorithms.o -MD -MP -MF src/Rpackage/src/math/$(DEPDIR)/cogaps-Algorithms.Tpo -c -o src/Rpackage/src/math/cogaps-Algorithms.o `test -f 'src/Rpackage/src/math/Algorithms.cpp' || echo '$(srcdir)/'`src/Rpackage/src/math/Algorithms.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/Rpackage/src/math/$(DEPDIR)/cogaps-Algorithms.Tpo src/Rpackage/src/math/$(DEPDIR)/cogaps-Algorithms.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/Rpackage/src/math/Algorithms.cpp' object='src/Rpackage/src/math/cogaps-Algorithms.o' libtool=no @AMDEPBACKSLASH@
+src/Rpackage/src/gibbs_sampler/cogaps-DenseGibbsSampler.o: src/Rpackage/src/gibbs_sampler/DenseGibbsSampler.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -MT src/Rpackage/src/gibbs_sampler/cogaps-DenseGibbsSampler.o -MD -MP -MF src/Rpackage/src/gibbs_sampler/$(DEPDIR)/cogaps-DenseGibbsSampler.Tpo -c -o src/Rpackage/src/gibbs_sampler/cogaps-DenseGibbsSampler.o `test -f 'src/Rpackage/src/gibbs_sampler/DenseGibbsSampler.cpp' || echo '$(srcdir)/'`src/Rpackage/src/gibbs_sampler/DenseGibbsSampler.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/Rpackage/src/gibbs_sampler/$(DEPDIR)/cogaps-DenseGibbsSampler.Tpo src/Rpackage/src/gibbs_sampler/$(DEPDIR)/cogaps-DenseGibbsSampler.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/Rpackage/src/gibbs_sampler/DenseGibbsSampler.cpp' object='src/Rpackage/src/gibbs_sampler/cogaps-DenseGibbsSampler.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -c -o src/Rpackage/src/math/cogaps-Algorithms.o `test -f 'src/Rpackage/src/math/Algorithms.cpp' || echo '$(srcdir)/'`src/Rpackage/src/math/Algorithms.cpp
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -c -o src/Rpackage/src/gibbs_sampler/cogaps-DenseGibbsSampler.o `test -f 'src/Rpackage/src/gibbs_sampler/DenseGibbsSampler.cpp' || echo '$(srcdir)/'`src/Rpackage/src/gibbs_sampler/DenseGibbsSampler.cpp
 
-src/Rpackage/src/math/cogaps-Algorithms.obj: src/Rpackage/src/math/Algorithms.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -MT src/Rpackage/src/math/cogaps-Algorithms.obj -MD -MP -MF src/Rpackage/src/math/$(DEPDIR)/cogaps-Algorithms.Tpo -c -o src/Rpackage/src/math/cogaps-Algorithms.obj `if test -f 'src/Rpackage/src/math/Algorithms.cpp'; then $(CYGPATH_W) 'src/Rpackage/src/math/Algorithms.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Rpackage/src/math/Algorithms.cpp'; fi`
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/Rpackage/src/math/$(DEPDIR)/cogaps-Algorithms.Tpo src/Rpackage/src/math/$(DEPDIR)/cogaps-Algorithms.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/Rpackage/src/math/Algorithms.cpp' object='src/Rpackage/src/math/cogaps-Algorithms.obj' libtool=no @AMDEPBACKSLASH@
+src/Rpackage/src/gibbs_sampler/cogaps-DenseGibbsSampler.obj: src/Rpackage/src/gibbs_sampler/DenseGibbsSampler.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -MT src/Rpackage/src/gibbs_sampler/cogaps-DenseGibbsSampler.obj -MD -MP -MF src/Rpackage/src/gibbs_sampler/$(DEPDIR)/cogaps-DenseGibbsSampler.Tpo -c -o src/Rpackage/src/gibbs_sampler/cogaps-DenseGibbsSampler.obj `if test -f 'src/Rpackage/src/gibbs_sampler/DenseGibbsSampler.cpp'; then $(CYGPATH_W) 'src/Rpackage/src/gibbs_sampler/DenseGibbsSampler.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Rpackage/src/gibbs_sampler/DenseGibbsSampler.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/Rpackage/src/gibbs_sampler/$(DEPDIR)/cogaps-DenseGibbsSampler.Tpo src/Rpackage/src/gibbs_sampler/$(DEPDIR)/cogaps-DenseGibbsSampler.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/Rpackage/src/gibbs_sampler/DenseGibbsSampler.cpp' object='src/Rpackage/src/gibbs_sampler/cogaps-DenseGibbsSampler.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -c -o src/Rpackage/src/math/cogaps-Algorithms.obj `if test -f 'src/Rpackage/src/math/Algorithms.cpp'; then $(CYGPATH_W) 'src/Rpackage/src/math/Algorithms.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Rpackage/src/math/Algorithms.cpp'; fi`
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -c -o src/Rpackage/src/gibbs_sampler/cogaps-DenseGibbsSampler.obj `if test -f 'src/Rpackage/src/gibbs_sampler/DenseGibbsSampler.cpp'; then $(CYGPATH_W) 'src/Rpackage/src/gibbs_sampler/DenseGibbsSampler.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Rpackage/src/gibbs_sampler/DenseGibbsSampler.cpp'; fi`
+
+src/Rpackage/src/gibbs_sampler/cogaps-SparseGibbsSampler.o: src/Rpackage/src/gibbs_sampler/SparseGibbsSampler.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -MT src/Rpackage/src/gibbs_sampler/cogaps-SparseGibbsSampler.o -MD -MP -MF src/Rpackage/src/gibbs_sampler/$(DEPDIR)/cogaps-SparseGibbsSampler.Tpo -c -o src/Rpackage/src/gibbs_sampler/cogaps-SparseGibbsSampler.o `test -f 'src/Rpackage/src/gibbs_sampler/SparseGibbsSampler.cpp' || echo '$(srcdir)/'`src/Rpackage/src/gibbs_sampler/SparseGibbsSampler.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/Rpackage/src/gibbs_sampler/$(DEPDIR)/cogaps-SparseGibbsSampler.Tpo src/Rpackage/src/gibbs_sampler/$(DEPDIR)/cogaps-SparseGibbsSampler.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/Rpackage/src/gibbs_sampler/SparseGibbsSampler.cpp' object='src/Rpackage/src/gibbs_sampler/cogaps-SparseGibbsSampler.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -c -o src/Rpackage/src/gibbs_sampler/cogaps-SparseGibbsSampler.o `test -f 'src/Rpackage/src/gibbs_sampler/SparseGibbsSampler.cpp' || echo '$(srcdir)/'`src/Rpackage/src/gibbs_sampler/SparseGibbsSampler.cpp
+
+src/Rpackage/src/gibbs_sampler/cogaps-SparseGibbsSampler.obj: src/Rpackage/src/gibbs_sampler/SparseGibbsSampler.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -MT src/Rpackage/src/gibbs_sampler/cogaps-SparseGibbsSampler.obj -MD -MP -MF src/Rpackage/src/gibbs_sampler/$(DEPDIR)/cogaps-SparseGibbsSampler.Tpo -c -o src/Rpackage/src/gibbs_sampler/cogaps-SparseGibbsSampler.obj `if test -f 'src/Rpackage/src/gibbs_sampler/SparseGibbsSampler.cpp'; then $(CYGPATH_W) 'src/Rpackage/src/gibbs_sampler/SparseGibbsSampler.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Rpackage/src/gibbs_sampler/SparseGibbsSampler.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/Rpackage/src/gibbs_sampler/$(DEPDIR)/cogaps-SparseGibbsSampler.Tpo src/Rpackage/src/gibbs_sampler/$(DEPDIR)/cogaps-SparseGibbsSampler.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/Rpackage/src/gibbs_sampler/SparseGibbsSampler.cpp' object='src/Rpackage/src/gibbs_sampler/cogaps-SparseGibbsSampler.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -c -o src/Rpackage/src/gibbs_sampler/cogaps-SparseGibbsSampler.obj `if test -f 'src/Rpackage/src/gibbs_sampler/SparseGibbsSampler.cpp'; then $(CYGPATH_W) 'src/Rpackage/src/gibbs_sampler/SparseGibbsSampler.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Rpackage/src/gibbs_sampler/SparseGibbsSampler.cpp'; fi`
+
+src/Rpackage/src/math/cogaps-Math.o: src/Rpackage/src/math/Math.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -MT src/Rpackage/src/math/cogaps-Math.o -MD -MP -MF src/Rpackage/src/math/$(DEPDIR)/cogaps-Math.Tpo -c -o src/Rpackage/src/math/cogaps-Math.o `test -f 'src/Rpackage/src/math/Math.cpp' || echo '$(srcdir)/'`src/Rpackage/src/math/Math.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/Rpackage/src/math/$(DEPDIR)/cogaps-Math.Tpo src/Rpackage/src/math/$(DEPDIR)/cogaps-Math.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/Rpackage/src/math/Math.cpp' object='src/Rpackage/src/math/cogaps-Math.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -c -o src/Rpackage/src/math/cogaps-Math.o `test -f 'src/Rpackage/src/math/Math.cpp' || echo '$(srcdir)/'`src/Rpackage/src/math/Math.cpp
+
+src/Rpackage/src/math/cogaps-Math.obj: src/Rpackage/src/math/Math.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -MT src/Rpackage/src/math/cogaps-Math.obj -MD -MP -MF src/Rpackage/src/math/$(DEPDIR)/cogaps-Math.Tpo -c -o src/Rpackage/src/math/cogaps-Math.obj `if test -f 'src/Rpackage/src/math/Math.cpp'; then $(CYGPATH_W) 'src/Rpackage/src/math/Math.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Rpackage/src/math/Math.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/Rpackage/src/math/$(DEPDIR)/cogaps-Math.Tpo src/Rpackage/src/math/$(DEPDIR)/cogaps-Math.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/Rpackage/src/math/Math.cpp' object='src/Rpackage/src/math/cogaps-Math.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -c -o src/Rpackage/src/math/cogaps-Math.obj `if test -f 'src/Rpackage/src/math/Math.cpp'; then $(CYGPATH_W) 'src/Rpackage/src/math/Math.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Rpackage/src/math/Math.cpp'; fi`
+
+src/Rpackage/src/math/cogaps-MatrixMath.o: src/Rpackage/src/math/MatrixMath.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -MT src/Rpackage/src/math/cogaps-MatrixMath.o -MD -MP -MF src/Rpackage/src/math/$(DEPDIR)/cogaps-MatrixMath.Tpo -c -o src/Rpackage/src/math/cogaps-MatrixMath.o `test -f 'src/Rpackage/src/math/MatrixMath.cpp' || echo '$(srcdir)/'`src/Rpackage/src/math/MatrixMath.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/Rpackage/src/math/$(DEPDIR)/cogaps-MatrixMath.Tpo src/Rpackage/src/math/$(DEPDIR)/cogaps-MatrixMath.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/Rpackage/src/math/MatrixMath.cpp' object='src/Rpackage/src/math/cogaps-MatrixMath.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -c -o src/Rpackage/src/math/cogaps-MatrixMath.o `test -f 'src/Rpackage/src/math/MatrixMath.cpp' || echo '$(srcdir)/'`src/Rpackage/src/math/MatrixMath.cpp
+
+src/Rpackage/src/math/cogaps-MatrixMath.obj: src/Rpackage/src/math/MatrixMath.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -MT src/Rpackage/src/math/cogaps-MatrixMath.obj -MD -MP -MF src/Rpackage/src/math/$(DEPDIR)/cogaps-MatrixMath.Tpo -c -o src/Rpackage/src/math/cogaps-MatrixMath.obj `if test -f 'src/Rpackage/src/math/MatrixMath.cpp'; then $(CYGPATH_W) 'src/Rpackage/src/math/MatrixMath.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Rpackage/src/math/MatrixMath.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/Rpackage/src/math/$(DEPDIR)/cogaps-MatrixMath.Tpo src/Rpackage/src/math/$(DEPDIR)/cogaps-MatrixMath.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/Rpackage/src/math/MatrixMath.cpp' object='src/Rpackage/src/math/cogaps-MatrixMath.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -c -o src/Rpackage/src/math/cogaps-MatrixMath.obj `if test -f 'src/Rpackage/src/math/MatrixMath.cpp'; then $(CYGPATH_W) 'src/Rpackage/src/math/MatrixMath.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Rpackage/src/math/MatrixMath.cpp'; fi`
 
 src/Rpackage/src/math/cogaps-Random.o: src/Rpackage/src/math/Random.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -MT src/Rpackage/src/math/cogaps-Random.o -MD -MP -MF src/Rpackage/src/math/$(DEPDIR)/cogaps-Random.Tpo -c -o src/Rpackage/src/math/cogaps-Random.o `test -f 'src/Rpackage/src/math/Random.cpp' || echo '$(srcdir)/'`src/Rpackage/src/math/Random.cpp
@@ -759,6 +999,20 @@ src/Rpackage/src/math/cogaps-Random.obj: src/Rpackage/src/math/Random.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/Rpackage/src/math/Random.cpp' object='src/Rpackage/src/math/cogaps-Random.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -c -o src/Rpackage/src/math/cogaps-Random.obj `if test -f 'src/Rpackage/src/math/Random.cpp'; then $(CYGPATH_W) 'src/Rpackage/src/math/Random.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Rpackage/src/math/Random.cpp'; fi`
+
+src/Rpackage/src/math/cogaps-VectorMath.o: src/Rpackage/src/math/VectorMath.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -MT src/Rpackage/src/math/cogaps-VectorMath.o -MD -MP -MF src/Rpackage/src/math/$(DEPDIR)/cogaps-VectorMath.Tpo -c -o src/Rpackage/src/math/cogaps-VectorMath.o `test -f 'src/Rpackage/src/math/VectorMath.cpp' || echo '$(srcdir)/'`src/Rpackage/src/math/VectorMath.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/Rpackage/src/math/$(DEPDIR)/cogaps-VectorMath.Tpo src/Rpackage/src/math/$(DEPDIR)/cogaps-VectorMath.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/Rpackage/src/math/VectorMath.cpp' object='src/Rpackage/src/math/cogaps-VectorMath.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -c -o src/Rpackage/src/math/cogaps-VectorMath.o `test -f 'src/Rpackage/src/math/VectorMath.cpp' || echo '$(srcdir)/'`src/Rpackage/src/math/VectorMath.cpp
+
+src/Rpackage/src/math/cogaps-VectorMath.obj: src/Rpackage/src/math/VectorMath.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -MT src/Rpackage/src/math/cogaps-VectorMath.obj -MD -MP -MF src/Rpackage/src/math/$(DEPDIR)/cogaps-VectorMath.Tpo -c -o src/Rpackage/src/math/cogaps-VectorMath.obj `if test -f 'src/Rpackage/src/math/VectorMath.cpp'; then $(CYGPATH_W) 'src/Rpackage/src/math/VectorMath.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Rpackage/src/math/VectorMath.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/Rpackage/src/math/$(DEPDIR)/cogaps-VectorMath.Tpo src/Rpackage/src/math/$(DEPDIR)/cogaps-VectorMath.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/Rpackage/src/math/VectorMath.cpp' object='src/Rpackage/src/math/cogaps-VectorMath.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -c -o src/Rpackage/src/math/cogaps-VectorMath.obj `if test -f 'src/Rpackage/src/math/VectorMath.cpp'; then $(CYGPATH_W) 'src/Rpackage/src/math/VectorMath.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Rpackage/src/math/VectorMath.cpp'; fi`
 
 ID: $(am__tagged_files)
 	$(am__define_uniq_tagged_files); mkid -fID $$unique
@@ -1019,10 +1273,14 @@ distclean-generic:
 	-rm -f src/$(am__dirstamp)
 	-rm -f src/Rpackage/src/$(DEPDIR)/$(am__dirstamp)
 	-rm -f src/Rpackage/src/$(am__dirstamp)
+	-rm -f src/Rpackage/src/atomic/$(DEPDIR)/$(am__dirstamp)
+	-rm -f src/Rpackage/src/atomic/$(am__dirstamp)
 	-rm -f src/Rpackage/src/data_structures/$(DEPDIR)/$(am__dirstamp)
 	-rm -f src/Rpackage/src/data_structures/$(am__dirstamp)
 	-rm -f src/Rpackage/src/file_parser/$(DEPDIR)/$(am__dirstamp)
 	-rm -f src/Rpackage/src/file_parser/$(am__dirstamp)
+	-rm -f src/Rpackage/src/gibbs_sampler/$(DEPDIR)/$(am__dirstamp)
+	-rm -f src/Rpackage/src/gibbs_sampler/$(am__dirstamp)
 	-rm -f src/Rpackage/src/math/$(DEPDIR)/$(am__dirstamp)
 	-rm -f src/Rpackage/src/math/$(am__dirstamp)
 
@@ -1035,7 +1293,7 @@ clean-am: clean-binPROGRAMS clean-generic mostlyclean-am
 
 distclean: distclean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
-	-rm -rf src/$(DEPDIR) src/Rpackage/src/$(DEPDIR) src/Rpackage/src/data_structures/$(DEPDIR) src/Rpackage/src/file_parser/$(DEPDIR) src/Rpackage/src/math/$(DEPDIR)
+	-rm -rf src/$(DEPDIR) src/Rpackage/src/$(DEPDIR) src/Rpackage/src/atomic/$(DEPDIR) src/Rpackage/src/data_structures/$(DEPDIR) src/Rpackage/src/file_parser/$(DEPDIR) src/Rpackage/src/gibbs_sampler/$(DEPDIR) src/Rpackage/src/math/$(DEPDIR)
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-hdr distclean-tags
@@ -1083,7 +1341,7 @@ installcheck-am:
 maintainer-clean: maintainer-clean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
 	-rm -rf $(top_srcdir)/autom4te.cache
-	-rm -rf src/$(DEPDIR) src/Rpackage/src/$(DEPDIR) src/Rpackage/src/data_structures/$(DEPDIR) src/Rpackage/src/file_parser/$(DEPDIR) src/Rpackage/src/math/$(DEPDIR)
+	-rm -rf src/$(DEPDIR) src/Rpackage/src/$(DEPDIR) src/Rpackage/src/atomic/$(DEPDIR) src/Rpackage/src/data_structures/$(DEPDIR) src/Rpackage/src/file_parser/$(DEPDIR) src/Rpackage/src/gibbs_sampler/$(DEPDIR) src/Rpackage/src/math/$(DEPDIR)
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 

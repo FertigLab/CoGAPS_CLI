@@ -1,4 +1,4 @@
-#include "Rpackage/src/GapsDispatcher.h"
+#include "Rpackage/src/GapsRunner.h"
 
 #include <string>
 
@@ -90,13 +90,11 @@ int main(int argc, char** argv)
     }
 
     // run cogaps
-    GapsDispatcher dispatcher(seed);
-    dispatcher.setNumPatterns(nPatterns);
-    dispatcher.setMaxIterations(nIterations);
-    dispatcher.setNumCoresPerSet(nCores);
-    dispatcher.loadData(data);
-    GapsResult result(dispatcher.run());
-    //result.writeCsv(outFile);
-
+    GapsParameters params(data, false, false, false, std::vector<unsigned>());
+    params.nPatterns = nPatterns;
+    params.nIterations = nIterations;
+    params.maxThreads = nCores;
+    GapsRandomState randState(seed);
+    GapsResult result(gaps::run(data, params, std::string(), &randState));
     return 0;
 }
