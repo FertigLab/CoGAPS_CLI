@@ -10,6 +10,10 @@ AC_PROG_CXX
 AC_ARG_ENABLE(debug, [AC_HELP_STRING([--enable-debug],
     [build debug version of CoGAPS])], [build_debug=$enableval], [build_debug=no])
 
+# Check if using google profiler
+AC_ARG_ENABLE(google-profiler, [AC_HELP_STRING([--enable-google-profiler],
+    [link with google profiler])], [google_profiler=yes], [google_profiler=no])
+
 # Check if compiler warnings should be turned on
 AC_ARG_ENABLE(warnings, [AC_HELP_STRING([--enable-warnings],
     [compile CoGAPS with warning messages])], [warnings=yes], [warnings=no])
@@ -24,6 +28,12 @@ GAPS_CPP_FLAGS=" -DBOOST_MATH_PROMOTE_DOUBLE_POLICY=0 "
 GAPS_CXX_FLAGS=
 GAPS_LDFLAGS=
 GAPS_LIBS=
+
+# enable google profiler
+if test "x$google_profiler" = "xyes" ; then
+    echo "Linking against Google profiler"
+    GAPS_LIBS+=" -lprofiler "
+fi
 
 # get compiler info
 AX_COMPILER_VENDOR
@@ -74,9 +84,7 @@ fi
 
 if test "x$use_simd" = "xno" ; then
     echo "Building without SIMD instructions"
-fi
-
-if test "x$use_simd" != "xno" ; then
+else
     GAPS_CXX_FLAGS+=" -march=native "
 fi
 

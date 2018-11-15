@@ -681,6 +681,7 @@ enable_option_checking
 enable_silent_rules
 enable_dependency_tracking
 enable_debug
+enable_google_profiler
 enable_warnings
 enable_simd
 enable_openmp
@@ -1327,6 +1328,8 @@ Optional Features:
   --disable-dependency-tracking
                           speeds up one-time build
   --enable-debug          build debug version of CoGAPS
+  --enable-google-profiler
+                          link with google profiler
   --enable-warnings       compile CoGAPS with warning messages
   --enable-simd           specify simd instruction set (sse, avx)
   --enable-openmp         compile with openMP support if available
@@ -3963,6 +3966,15 @@ else
 fi
 
 
+# Check if using google profiler
+# Check whether --enable-google-profiler was given.
+if test "${enable_google_profiler+set}" = set; then :
+  enableval=$enable_google_profiler; google_profiler=yes
+else
+  google_profiler=no
+fi
+
+
 # Check if compiler warnings should be turned on
 # Check whether --enable-warnings was given.
 if test "${enable_warnings+set}" = set; then :
@@ -3986,6 +3998,12 @@ GAPS_CPP_FLAGS=" -DBOOST_MATH_PROMOTE_DOUBLE_POLICY=0 "
 GAPS_CXX_FLAGS=
 GAPS_LDFLAGS=
 GAPS_LIBS=
+
+# enable google profiler
+if test "x$google_profiler" = "xyes" ; then
+    echo "Linking against Google profiler"
+    GAPS_LIBS+=" -lprofiler "
+fi
 
 # get compiler info
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for C++ compiler vendor" >&5
@@ -5140,9 +5158,7 @@ fi
 
 if test "x$use_simd" = "xno" ; then
     echo "Building without SIMD instructions"
-fi
-
-if test "x$use_simd" != "xno" ; then
+else
     GAPS_CXX_FLAGS+=" -march=native "
 fi
 

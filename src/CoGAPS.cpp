@@ -1,4 +1,5 @@
 #include "Rpackage/src/GapsRunner.h"
+#include "config.h"
 
 #include <string>
 
@@ -14,20 +15,25 @@ int main(int argc, char** argv)
     unsigned nIterations = 1000;
     unsigned nCores = 1;
     unsigned seed = 0;
+    bool useSparseOptimization = false;
+    unsigned outputFrequency = 1000;
     std::string outFile("cogaps_result");
 
     // names of allowed parameters
     const char *short_opt = "d:p:i:c:s:o:h";
     struct option long_opt[] =
     {
-        {"data",          required_argument, NULL, 'd'},
-        {"nPatterns",     required_argument, NULL, 'p'},
-        {"nIterations",   required_argument, NULL, 'i'},
-        {"nCores",        required_argument, NULL, 'c'},
-        {"seed",          required_argument, NULL, 's'},
-        {"outFile",       required_argument, NULL, 'o'},
-        {"help",          no_argument,       NULL, 'h'},
-        {NULL,            0,                 NULL,  0 }
+        {"data",                  required_argument, NULL, 'd'},
+        {"nPatterns",             required_argument, NULL, 'p'},
+        {"nIterations",           required_argument, NULL, 'i'},
+        {"nCores",                required_argument, NULL, 'c'},
+        {"seed",                  required_argument, NULL, 's'},
+        {"outFile",               required_argument, NULL, 'o'},
+        {"outputFrequency",       required_argument, NULL, 'f'},
+        {"useSparseOptimization", no_argument,       NULL, 'x'},
+        {"help",                  no_argument,       NULL, 'h'},
+        {"version",               no_argument,       NULL, 'v'},
+        {NULL,                    0,                 NULL,  0 }
     };
 
     // parse command line
@@ -57,16 +63,28 @@ int main(int argc, char** argv)
             case 'o':
                 outFile = optarg;
                 break;
+            case 'f':
+                outputFrequency = atoi(optarg);
+                break;
+            case 'x':
+                useSparseOptimization = true;
+                break;
             case 'h':
                 printf("Usage: %s [OPTIONS]\n", argv[0]);
-                printf("  -d, --data file         count matrix file\n");
-                printf("  -p, --nPatterns N       number of patterns\n");
-                printf("  -i, --nIterations N     max number of iterations\n");
-                printf("  -c, --nCores N          max number of cores to use\n");
-                printf("  -s, --seed N            random generator seed\n");
-                printf("  -o, --output file       output file name\n");
-                printf("  -h, --help              print this help message\n");
+                printf("  -d, --data file               file with data in matrix format\n");
+                printf("  -p, --nPatterns N             number of patterns\n");
+                printf("  -i, --nIterations N           max number of iterations\n");
+                printf("  -c, --nCores N                max number of cores to use\n");
+                printf("  -x, --useSparseOptimization   enable optimization for sparse data\n");
+                printf("  -s, --seed N                  random generator seed\n");
+                printf("  -f, --outputFrequency N       how often to print status\n");
+                printf("  -o, --output file             output file name\n");
+                printf("  -h, --help                    print this help message\n");
                 printf("\n");
+                return 0;
+
+            case 'v':
+                printf("CoGAPS version %s\n", VERSION);
                 return 0;
 
             case ':':
@@ -94,6 +112,8 @@ int main(int argc, char** argv)
     params.nPatterns = nPatterns;
     params.nIterations = nIterations;
     params.maxThreads = nCores;
+    params.useSparseOptimization = useSparseOptimization;
+    params.outputFrequency = outputFrequency;
     GapsRandomState randState(seed);
     GapsResult result(gaps::run(data, params, std::string(), &randState));
     return 0;
