@@ -86,8 +86,6 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
-build_triplet = @build@
-host_triplet = @host@
 bin_PROGRAMS = cogaps$(EXEEXT)
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -110,7 +108,6 @@ am_cogaps_OBJECTS = src/cogaps-CoGAPS.$(OBJEXT) \
 	src/Rpackage/src/cogaps-GapsResult.$(OBJEXT) \
 	src/Rpackage/src/cogaps-GapsRunner.$(OBJEXT) \
 	src/Rpackage/src/cogaps-GapsStatistics.$(OBJEXT) \
-	src/Rpackage/src/atomic/cogaps-AtomAllocator.$(OBJEXT) \
 	src/Rpackage/src/atomic/cogaps-AtomicDomain.$(OBJEXT) \
 	src/Rpackage/src/atomic/cogaps-ProposalQueue.$(OBJEXT) \
 	src/Rpackage/src/data_structures/cogaps-HashSets.$(OBJEXT) \
@@ -224,13 +221,7 @@ AUTOCONF = @AUTOCONF@
 AUTOHEADER = @AUTOHEADER@
 AUTOMAKE = @AUTOMAKE@
 AWK = @AWK@
-BOOST_CPPFLAGS = @BOOST_CPPFLAGS@
-BOOST_LDFLAGS = @BOOST_LDFLAGS@
-CC = @CC@
-CCDEPMODE = @CCDEPMODE@
-CFLAGS = @CFLAGS@
 CPPFLAGS = @CPPFLAGS@
-CPUEXT_FLAGS = @CPUEXT_FLAGS@
 CXX = @CXX@
 CXXCPP = @CXXCPP@
 CXXDEPMODE = @CXXDEPMODE@
@@ -269,14 +260,12 @@ PATH_SEPARATOR = @PATH_SEPARATOR@
 SED = @SED@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
-SIMD_FLAGS = @SIMD_FLAGS@
 STRIP = @STRIP@
 VERSION = @VERSION@
 abs_builddir = @abs_builddir@
 abs_srcdir = @abs_srcdir@
 abs_top_builddir = @abs_top_builddir@
 abs_top_srcdir = @abs_top_srcdir@
-ac_ct_CC = @ac_ct_CC@
 ac_ct_CXX = @ac_ct_CXX@
 am__include = @am__include@
 am__leading_dot = @am__leading_dot@
@@ -284,22 +273,14 @@ am__quote = @am__quote@
 am__tar = @am__tar@
 am__untar = @am__untar@
 bindir = @bindir@
-build = @build@
 build_alias = @build_alias@
-build_cpu = @build_cpu@
-build_os = @build_os@
-build_vendor = @build_vendor@
 builddir = @builddir@
 datadir = @datadir@
 datarootdir = @datarootdir@
 docdir = @docdir@
 dvidir = @dvidir@
 exec_prefix = @exec_prefix@
-host = @host@
 host_alias = @host_alias@
-host_cpu = @host_cpu@
-host_os = @host_os@
-host_vendor = @host_vendor@
 htmldir = @htmldir@
 includedir = @includedir@
 infodir = @infodir@
@@ -330,7 +311,6 @@ cogaps_SOURCES = \
     src/Rpackage/src/GapsResult.cpp \
     src/Rpackage/src/GapsRunner.cpp \
     src/Rpackage/src/GapsStatistics.cpp \
-    src/Rpackage/src/atomic/AtomAllocator.cpp \
     src/Rpackage/src/atomic/AtomicDomain.cpp \
     src/Rpackage/src/atomic/ProposalQueue.cpp \
     src/Rpackage/src/data_structures/HashSets.cpp \
@@ -353,7 +333,7 @@ cogaps_SOURCES = \
     src/Rpackage/src/math/Random.cpp \
     src/Rpackage/src/math/VectorMath.cpp
 
-cogaps_CPPFLAGS = @GAPS_CPP_FLAGS@
+cogaps_CPPFLAGS = @GAPS_CPP_FLAGS@ -I$(top_srcdir)/src/Rpackage/src/include
 cogaps_CXXFLAGS = @GAPS_CXX_FLAGS@
 cogaps_LDFLAGS = @GAPS_LDFLAGS@
 cogaps_LDADD = @GAPS_LIBS@
@@ -484,9 +464,6 @@ src/Rpackage/src/atomic/$(am__dirstamp):
 src/Rpackage/src/atomic/$(DEPDIR)/$(am__dirstamp):
 	@$(MKDIR_P) src/Rpackage/src/atomic/$(DEPDIR)
 	@: > src/Rpackage/src/atomic/$(DEPDIR)/$(am__dirstamp)
-src/Rpackage/src/atomic/cogaps-AtomAllocator.$(OBJEXT):  \
-	src/Rpackage/src/atomic/$(am__dirstamp) \
-	src/Rpackage/src/atomic/$(DEPDIR)/$(am__dirstamp)
 src/Rpackage/src/atomic/cogaps-AtomicDomain.$(OBJEXT):  \
 	src/Rpackage/src/atomic/$(am__dirstamp) \
 	src/Rpackage/src/atomic/$(DEPDIR)/$(am__dirstamp)
@@ -597,7 +574,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@src/Rpackage/src/$(DEPDIR)/cogaps-GapsResult.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/Rpackage/src/$(DEPDIR)/cogaps-GapsRunner.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/Rpackage/src/$(DEPDIR)/cogaps-GapsStatistics.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@src/Rpackage/src/atomic/$(DEPDIR)/cogaps-AtomAllocator.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/Rpackage/src/atomic/$(DEPDIR)/cogaps-AtomicDomain.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/Rpackage/src/atomic/$(DEPDIR)/cogaps-ProposalQueue.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@src/Rpackage/src/data_structures/$(DEPDIR)/cogaps-HashSets.Po@am__quote@
@@ -705,20 +681,6 @@ src/Rpackage/src/cogaps-GapsStatistics.obj: src/Rpackage/src/GapsStatistics.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/Rpackage/src/GapsStatistics.cpp' object='src/Rpackage/src/cogaps-GapsStatistics.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -c -o src/Rpackage/src/cogaps-GapsStatistics.obj `if test -f 'src/Rpackage/src/GapsStatistics.cpp'; then $(CYGPATH_W) 'src/Rpackage/src/GapsStatistics.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Rpackage/src/GapsStatistics.cpp'; fi`
-
-src/Rpackage/src/atomic/cogaps-AtomAllocator.o: src/Rpackage/src/atomic/AtomAllocator.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -MT src/Rpackage/src/atomic/cogaps-AtomAllocator.o -MD -MP -MF src/Rpackage/src/atomic/$(DEPDIR)/cogaps-AtomAllocator.Tpo -c -o src/Rpackage/src/atomic/cogaps-AtomAllocator.o `test -f 'src/Rpackage/src/atomic/AtomAllocator.cpp' || echo '$(srcdir)/'`src/Rpackage/src/atomic/AtomAllocator.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/Rpackage/src/atomic/$(DEPDIR)/cogaps-AtomAllocator.Tpo src/Rpackage/src/atomic/$(DEPDIR)/cogaps-AtomAllocator.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/Rpackage/src/atomic/AtomAllocator.cpp' object='src/Rpackage/src/atomic/cogaps-AtomAllocator.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -c -o src/Rpackage/src/atomic/cogaps-AtomAllocator.o `test -f 'src/Rpackage/src/atomic/AtomAllocator.cpp' || echo '$(srcdir)/'`src/Rpackage/src/atomic/AtomAllocator.cpp
-
-src/Rpackage/src/atomic/cogaps-AtomAllocator.obj: src/Rpackage/src/atomic/AtomAllocator.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -MT src/Rpackage/src/atomic/cogaps-AtomAllocator.obj -MD -MP -MF src/Rpackage/src/atomic/$(DEPDIR)/cogaps-AtomAllocator.Tpo -c -o src/Rpackage/src/atomic/cogaps-AtomAllocator.obj `if test -f 'src/Rpackage/src/atomic/AtomAllocator.cpp'; then $(CYGPATH_W) 'src/Rpackage/src/atomic/AtomAllocator.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Rpackage/src/atomic/AtomAllocator.cpp'; fi`
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) src/Rpackage/src/atomic/$(DEPDIR)/cogaps-AtomAllocator.Tpo src/Rpackage/src/atomic/$(DEPDIR)/cogaps-AtomAllocator.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='src/Rpackage/src/atomic/AtomAllocator.cpp' object='src/Rpackage/src/atomic/cogaps-AtomAllocator.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -c -o src/Rpackage/src/atomic/cogaps-AtomAllocator.obj `if test -f 'src/Rpackage/src/atomic/AtomAllocator.cpp'; then $(CYGPATH_W) 'src/Rpackage/src/atomic/AtomAllocator.cpp'; else $(CYGPATH_W) '$(srcdir)/src/Rpackage/src/atomic/AtomAllocator.cpp'; fi`
 
 src/Rpackage/src/atomic/cogaps-AtomicDomain.o: src/Rpackage/src/atomic/AtomicDomain.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(cogaps_CPPFLAGS) $(CPPFLAGS) $(cogaps_CXXFLAGS) $(CXXFLAGS) -MT src/Rpackage/src/atomic/cogaps-AtomicDomain.o -MD -MP -MF src/Rpackage/src/atomic/$(DEPDIR)/cogaps-AtomicDomain.Tpo -c -o src/Rpackage/src/atomic/cogaps-AtomicDomain.o `test -f 'src/Rpackage/src/atomic/AtomicDomain.cpp' || echo '$(srcdir)/'`src/Rpackage/src/atomic/AtomicDomain.cpp

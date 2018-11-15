@@ -6,7 +6,6 @@ cogaps_SOURCES = \
     src/Rpackage/src/GapsResult.cpp \
     src/Rpackage/src/GapsRunner.cpp \
     src/Rpackage/src/GapsStatistics.cpp \
-    src/Rpackage/src/atomic/AtomAllocator.cpp \
     src/Rpackage/src/atomic/AtomicDomain.cpp \
     src/Rpackage/src/atomic/ProposalQueue.cpp \
     src/Rpackage/src/data_structures/HashSets.cpp \
@@ -29,7 +28,7 @@ cogaps_SOURCES = \
     src/Rpackage/src/math/Random.cpp \
     src/Rpackage/src/math/VectorMath.cpp
 
-cogaps_CPPFLAGS = @GAPS_CPP_FLAGS@
+cogaps_CPPFLAGS = @GAPS_CPP_FLAGS@ -I$(top_srcdir)/src/Rpackage/src/include
 cogaps_CXXFLAGS = @GAPS_CXX_FLAGS@
 cogaps_LDFLAGS = @GAPS_LDFLAGS@
 cogaps_LDADD = @GAPS_LIBS@

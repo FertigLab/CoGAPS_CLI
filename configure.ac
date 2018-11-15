@@ -29,10 +29,6 @@ GAPS_LIBS=
 AX_COMPILER_VENDOR
 AX_COMPILER_VERSION
 
-# find boost libraries
-AX_BOOST_BASE([1.32])
-GAPS_CPP_FLAGS+=" $BOOST_CPPFLAGS "
-
 # set openmp flags, disable only if requested
 AC_ARG_ENABLE(openmp, [AC_HELP_STRING([--enable-openmp],
     [compile with openMP support if available])],
